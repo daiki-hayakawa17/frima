@@ -15,7 +15,7 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('condition_id')->constrained()->cascadeOnDelete();
+            $table->tinyInteger('condition');
             $table->string('name');
             $table->string('image');
             $table->string('brand');

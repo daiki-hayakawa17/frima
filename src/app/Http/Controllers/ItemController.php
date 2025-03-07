@@ -15,4 +15,12 @@ class ItemController extends Controller
         
         return view('index', compact('items'));
     }
+
+    public function detail($item_id)
+    {
+        $item = Item::find($item_id);
+        $categories = Category::all();
+
+        return view('detail', compact('item', 'categories'));
+    }
 }
