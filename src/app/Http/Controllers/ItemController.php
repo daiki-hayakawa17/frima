@@ -23,4 +23,9 @@ class ItemController extends Controller
 
         return view('detail', compact('item', 'categories'));
     }
+
+    public function loginView()
+    {
+        return view('auth.login');
+    }
 }

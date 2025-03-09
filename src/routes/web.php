@@ -20,3 +20,5 @@ Route::get('/', function () {
 Route::get('/', [ItemController::class, 'index']);
 
 Route::get('/item/{item_id}', [ItemController::class, 'detail']);
+
+Route::get('/login', [ItemController::class, 'loginView']);
