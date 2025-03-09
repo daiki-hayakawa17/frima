@@ -1,0 +1,65 @@
+.login__form {
+    width: 680px;
+    height: 656px;
+    margin: 118px auto 126px;
+}
+
+.form__title {
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 100%;
+    text-align: center;
+}
+
+.form__label {
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 100%;
+}
+
+.form__input input {
+    width: 100%;
+    height: 57px;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+}
+
+.form__group {
+    margin-bottom: 36px;
+}
+
+.form__button {
+    margin-top: 44px;
+    margin-bottom: 18px;
+}
+
+.form__button--submit {
+    width: 100%;
+    height: 65px;
+    border: none;
+    border-radius: 5px;
+    background-color: #FF5555;
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 100%;
+    color: #ffffff;
+}
+
+.register__link {
+    display: block;
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 100%;
+    color: #0073CC;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 30px;
+}

@@ -1,0 +1,224 @@
+.detail__content {
+    display: flex;
+}
+
+.left__content {
+    width: 690px;
+    height: 1704px;
+    margin-top: 95px;
+    margin-left: 66px;
+}
+
+.item__image {
+    width: 600px;
+    height: 600px;
+    margin-top: 36px;
+    margin-left: 45px;
+    margin-right: 45px;
+    border-radius: 4px;
+}
+
+.item__image img {
+    width: 100%;
+    height: 100%;
+}
+
+.right__content {
+    width: 690px;
+    height: 1704px;
+    margin-top: 95px;
+    margin-right: 66px;
+    padding-left: 65px;
+    padding-right: 55px;
+}
+
+.item__title {
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 45px;
+    line-height: 100%;
+    font-weight: 700;
+    vertical-align: middle;
+}
+
+.item__name {
+    margin-bottom: 0;
+}
+
+.brand__name {
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 100%;
+    vertical-align: middle;
+}
+
+.item__price {
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 100%;
+    vertical-align: bottom;
+    margin-top: 28px;
+}
+
+.price {
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 45px;
+    font-weight: 400;
+    line-height: 100%;
+    vertical-align: middle;
+}
+
+.icons {
+    display: flex;
+    vertical-align: middle;
+    margin-top: 28px;
+    margin-left: 45px;
+}
+
+.like__button {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border: none;
+}
+
+.like__button img {
+    width: 100%;
+    height: 100%;
+}
+
+.comment__icon {
+    width: 40px;
+    height: 40px;
+    margin-left: 64px;
+}
+
+.comment__icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.buy__button {
+    width: 570px;
+    height: 100px;
+    padding: 22px 0;
+}
+
+.buy__button--submit {
+    width: 570px;
+    height: 56px;
+    background-color: #FF5555;
+    border: none;
+    border-radius: 4px;
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 100%;
+    text-align: center;
+    vertical-align: middle;
+    color: #FFFFFF;
+}
+
+.item__description {
+    width: 570px;
+    height: 321px;
+}
+
+.description__title {
+    display: flex;
+    width: 559px;
+    height: 74px;
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 100%;
+    margin-top: 0;
+    align-items: center;
+}
+
+.description__content {
+    width: 559px;
+    height: 247px;
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 100%;
+}
+
+.information__title {
+    display: flex;
+    height: 100px;
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 100%;
+    align-items: center;
+}
+
+.information__category {
+    display: flex;
+}
+
+.category__content {
+    display: flex;
+}
+
+.subtitle__category {
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 100%;
+    margin-right: 60px;
+}
+
+.category__icon {
+    display: flex;
+    width: 100px;
+    height: 30px;
+    background-color: #D9D9D9;
+    border-radius: 15px;
+    margin-left: 22px;
+    justify-content: center;
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 100%;
+    align-items: center;
+}
+
+.information__status {
+    height: 100px;
+    margin-top: 0;
+    display: flex;
+}
+
+.subtitle__status {
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 100%;
+    margin-right: 76px;
+}
+
+.status__content {
+    font-family: "Inter", serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+}
