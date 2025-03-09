@@ -24,3 +24,5 @@ Route::get('/item/{item_id}', [ItemController::class, 'detail']);
 Route::get('/login', [ItemController::class, 'loginView']);
 
 Route::get('/register', [ItemController::class, 'registerView']);
+
+Route::get('/mypage/profile', [ItemController::class, 'profileRegister']);

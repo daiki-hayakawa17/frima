@@ -33,4 +33,9 @@ class ItemController extends Controller
     {
         return view('auth.register');
     }
+
+    public function profileRegister()
+    {
+        return view('profile');
+    }
 }
