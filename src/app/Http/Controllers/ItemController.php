@@ -38,4 +38,11 @@ class ItemController extends Controller
     {
         return view('profile');
     }
+
+    public function sellView()
+    {
+        $categories = Category::all();
+
+        return view('sell', compact('categories'));
+    }
 }
