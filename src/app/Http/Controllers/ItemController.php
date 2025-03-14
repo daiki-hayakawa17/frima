@@ -24,6 +24,14 @@ class ItemController extends Controller
         return view('detail', compact('item', 'categories'));
     }
 
+    public function purchase($item_id)
+    {
+        $item = Item::find($item_id);
+        
+
+        return view('purchase', compact('item'));
+    }
+
     public function loginView()
     {
         return view('auth.login');

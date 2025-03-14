@@ -9,18 +9,21 @@
     <div class="left__content">
         <div class="item__image">
             <img src="{{ asset($item->image) }}" alt="商品画像" class="img-content">
+            <input type="hidden" name="image" value="{{$item->image}}">
         </div>
     </div>
     <div class="right__content">
-        <form class="form">
+        <div class="form">
             <div class="item__title">
                 <h2 class="item__name">{{ $item->name }}</h2>
+                <input type="hidden" name="name" value="{{$item->name}}">
                 <p class="brand__name">
                     {{ $item->brand }}
                 </p>
                 <p class="item__price">
                     ￥<span class="price">{{ $item->price }}</span>(税込)
                 </p>
+                <input type="hidden" name="price" value="{{$item->price}}">
                 <div class="icons">
                     <button class="like__button">
                         <img src="{{ asset('storage/images/like-button.png') }}" alt="いいねボタン">
@@ -31,11 +34,11 @@
                 </div>
             </div>
             <div class="buy__button">
-                <button class="buy__button--submit">
+                <a href="/purchase/{{$item->id}}" class="buy__button--submit">
                     購入手続きへ
-                </button>
+                </a>
             </div>
-        </form>
+        </div>
         <div class="item__description">
             <h2 class="description__title">商品説明</h2>
             <p class="description__content">

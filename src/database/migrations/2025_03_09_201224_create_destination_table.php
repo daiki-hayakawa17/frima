@@ -16,7 +16,7 @@ class CreateDestinationTable extends Migration
         Schema::create('destination', function (Blueprint $table) {
             $table->id();
             $table->string('post');
-            $table->string('addoress');
+            $table->string('address');
             $table->string('building');
             $table->timestamps();
         });
