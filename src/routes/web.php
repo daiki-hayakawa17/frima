@@ -21,6 +21,8 @@ Route::get('/', [ItemController::class, 'index']);
 
 Route::get('/item/{item_id}', [ItemController::class, 'detail']);
 
+Route::get('/purchase/{item_id}', [ItemController::class, 'purchase']);
+
 Route::get('/login', [ItemController::class, 'loginView']);
 
 Route::get('/register', [ItemController::class, 'registerView']);
@@ -28,3 +30,4 @@ Route::get('/register', [ItemController::class, 'registerView']);
 Route::get('/mypage/profile', [ItemController::class, 'profileRegister']);
 
 Route::get('/sell', [ItemController::class, 'sellView']);
+
