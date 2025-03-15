@@ -53,4 +53,9 @@ class ItemController extends Controller
 
         return view('sell', compact('categories'));
     }
+
+    public function addressView($item_id)
+    {
+        return view('address');
+    }
 }
