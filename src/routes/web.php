@@ -31,3 +31,4 @@ Route::get('/mypage/profile', [ItemController::class, 'profileRegister']);
 
 Route::get('/sell', [ItemController::class, 'sellView']);
 
+Route::get('/purchase/address/{item_id}', [ItemController::class, 'addressView']);
