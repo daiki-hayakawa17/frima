@@ -20,7 +20,7 @@ class CreateProfileTable extends Migration
             $table->string('post');
             $table->string('address');
             $table->string('building');
-            $table->tynInteger('pay');
+            $table->tinyInteger('pay');
             $table->timestamps();
         });
     }

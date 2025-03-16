@@ -58,4 +58,9 @@ class ItemController extends Controller
     {
         return view('address');
     }
+
+    public function mypageView()
+    {
+        
+    }
 }
