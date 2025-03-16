@@ -16,7 +16,7 @@ class ItemTableSeeder extends Seeder
     {
         DB::table('items')->insert([
             [
-                'condition_id' => '1',
+                'condition' => '1',
                 'name' => '腕時計',
                 'image' => 'storage/images/Clock.jpg',
                 'brand' => 'アルマーニ',
@@ -24,7 +24,7 @@ class ItemTableSeeder extends Seeder
                 'description' => 'スタイリッシュなデザインのメンズ腕時計',
             ],
             [
-                'condition_id' => '2',
+                'condition' => '2',
                 'name' => 'HDD',
                 'image' => 'storage/images/Disk.jpg',
                 'brand' => 'COACHTECH',
@@ -32,7 +32,7 @@ class ItemTableSeeder extends Seeder
                 'description' => '高速で信頼性の高いハードディスク',
             ],
             [
-                'condition_id' => '3',
+                'condition' => '3',
                 'name' => '玉ねぎ3束',
                 'image' => 'storage/images/onion.jpg',
                 'brand' => 'COACHTECH',
@@ -40,7 +40,7 @@ class ItemTableSeeder extends Seeder
                 'description' => '新鮮な玉ねぎ3束のセット',
             ],
             [
-                'condition_id' => '4',
+                'condition' => '4',
                 'name' => '革靴',
                 'image' => 'storage/images/LeatherShoes.jpg',
                 'brand' => 'COACHTECH',
@@ -48,7 +48,7 @@ class ItemTableSeeder extends Seeder
                 'description' => 'クラシックなデザインの革靴',
             ],
             [
-                'condition_id' => '1',
+                'condition' => '1',
                 'name' => 'ノートPC',
                 'image' => 'storage/images/pc.jpg',
                 'brand' => 'COACHTECH',
@@ -56,7 +56,7 @@ class ItemTableSeeder extends Seeder
                 'description' => '高性能なノートパソコン',
             ],
             [
-                'condition_id' => '2',
+                'condition' => '2',
                 'name' => 'マイク',
                 'image' => 'storage/images/MusicMic.jpg',
                 'brand' => 'COACHTECH',
@@ -64,7 +64,7 @@ class ItemTableSeeder extends Seeder
                 'description' => '高音質のレコーディング用マイク',
             ],
             [
-                'condition_id' => '3',
+                'condition' => '3',
                 'name' => 'ショルダーバッグ',
                 'image' => 'storage/images/pocket.jpg',
                 'brand' => 'COACHTECH',
@@ -72,7 +72,7 @@ class ItemTableSeeder extends Seeder
                 'description' => 'おしゃれなショルダーバッグ',
             ],
             [
-                'condition_id' => '4',
+                'condition' => '4',
                 'name' => 'タンブラー',
                 'image' => 'storage/images/Tumbler.jpg',
                 'brand' => 'COACHTECH',
@@ -80,7 +80,7 @@ class ItemTableSeeder extends Seeder
                 'description' => '使いやすいタンブラー',
             ],
             [
-                'condition_id' => '1',
+                'condition' => '1',
                 'name' => 'コーヒーミル',
                 'image' => 'storage/images/CoffeeGrinder.jpg',
                 'brand' => 'COACHTECH',
@@ -88,7 +88,7 @@ class ItemTableSeeder extends Seeder
                 'description' => '手動のコーヒーミル',
             ],
             [
-                'condition_id' => '2',
+                'condition' => '2',
                 'name' => 'メイクセット',
                 'image' => 'storage/images/make.jpg',
                 'brand' => 'COACHTECH',
