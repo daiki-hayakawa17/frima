@@ -14,9 +14,9 @@
 
 <body>
     <header class="header">
-        <div class="header__title">
+        <a class="header__title" href="/">
             <img src="{{ asset('/images/logo.svg') }}" class="header__logo">
-        </div>
+        </a>
         <div class="header__search">
             <input type="text" name="name" placeholder="なにをお探しですか?">
         </div>

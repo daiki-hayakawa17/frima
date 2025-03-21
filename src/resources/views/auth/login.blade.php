@@ -20,12 +20,13 @@
     </header> 
     
     <main>
-        <form class="login__form">
+        <form class="login__form" action="/login" method="post">
+            @csrf
             <h2 class="form__title">ログイン</h2>
             <div class="form__group">
                 <span class="form__label">メールアドレス</span>
                 <div class="form__input">
-                    <input type="email" name="email">
+                    <input type="email" name="email" value="{{ old('email') }}">
                 </div>
             </div>
             <div class="form__group">
