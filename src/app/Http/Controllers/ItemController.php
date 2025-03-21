@@ -32,10 +32,10 @@ class ItemController extends Controller
         return view('purchase', compact('item'));
     }
 
-    public function loginView()
-    {
-        return view('auth.login');
-    }
+    // public function loginView()
+    // {
+    //     return view('auth.login');
+    // }
 
     public function registerView()
     {

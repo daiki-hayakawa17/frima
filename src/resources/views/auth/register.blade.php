@@ -20,18 +20,19 @@
     </header> 
     
     <main>
-        <form class="register__form">
+        <form class="register__form" action="/register" method="post">
+            @csrf
             <h2 class="form__title">会員登録</h2>
             <div class="form__group">
                 <span class="form__label">ユーザー名</span>
                 <div class="form__input">
-                    <input type="text" name="name">
+                    <input type="text" name="name" value="{{ old('name') }}">
                 </div>
             </div>
             <div class="form__group">
                 <span class="form__label">メールアドレス</span>
                 <div class="form__input">
-                    <input type="email" name="email">
+                    <input type="email" name="email" value="{{ old('email') }}">
                 </div>
             </div>
             <div class="form__group">
