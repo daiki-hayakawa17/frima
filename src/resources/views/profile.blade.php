@@ -7,11 +7,13 @@
 @section('content')
 <div class="profile__content">
     <h2 class="profile__title">プロフィール設定</h2>
-    <form class="profile__register--form">
+    <form class="profile__register--form" action="/mypage/profile" method="post" enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
         <div class="form__input--image">
             <output id="image" class="image__output"></output>
-            <label for="item__image">画像を選択する</label>
-            <input type="file" id="item__image" name="item__image">
+            <label for="profile__image">画像を選択する</label>
+            <input type="file" id="profile__image" name="image">
         </div>
         <div class="form__group">
             <span class="form__input--label">ユーザー名</span>
@@ -46,7 +48,7 @@
 
 @section('script')
 <script>
-        document.getElementById('item__image').onchange = function(event){
+        document.getElementById('profile__image').onchange = function(event){
 
             initializeFiles();
 
