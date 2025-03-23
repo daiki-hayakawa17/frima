@@ -42,10 +42,10 @@ class ItemController extends Controller
         return view('auth.register');
     }
 
-    public function profileRegister()
-    {
-        return view('profile');
-    }
+    // public function profileRegister()
+    // {
+    //     return view('profile');
+    // }
 
     public function sellView()
     {
@@ -54,10 +54,10 @@ class ItemController extends Controller
         return view('sell', compact('categories'));
     }
 
-    public function addressView($item_id)
-    {
-        return view('address');
-    }
+    // public function addressView($item_id)
+    // {
+    //     return view('address');
+    // }
 
     public function mypageView()
     {
