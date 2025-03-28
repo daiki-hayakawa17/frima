@@ -21,11 +21,11 @@ class AuthController extends Controller
         $file_name = $file->getClientOriginalName();
         $request->file('image')->storeAs('public/' . $dir, $file_name);
 
-        // $user_id = $request['user_id'];
+        
         $profile_data = $request->only('user_id', 'name', 'image', 'post', 'address', 'building');
         $image = 'storage/' . $dir . '/' . $file_name;
         $profile_data['image'] = $image;
-        // $profile->image = 'storage/' . $dir . '/' . $file_name;
+        
 
 
         Profile::updateOrCreate(
@@ -40,13 +40,6 @@ class AuthController extends Controller
             ]
         );
 
-        // if (!empty($profile['id'])) {
-        //     Profile::find($profile->id)->update($profile_data);
-        // } else {
-        //     Profile::create($profile_data);
-        // }
-        
-        // dd($profile_data);
         return redirect('/');
     }
 

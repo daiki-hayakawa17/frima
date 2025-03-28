@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/mypage/profile', [AuthController::class, 'profileView']);
     Route::get('/purchase/address/{item_id}', [AuthController::class, 'addressView']);
     Route::get('/sell', [ItemController::class, 'sellView']);
+    Route::post('/sell', [ItemController::class, 'itemRegister']);
 });
 Route::get('/', [ItemController::class, 'index']);
 

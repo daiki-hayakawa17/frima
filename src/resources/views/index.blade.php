@@ -22,4 +22,5 @@
         </div>
     @endforeach
 </div>
+{{ $items->links() }}
 @endsection

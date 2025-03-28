@@ -10,10 +10,13 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
+        'seller_id',
+        'purchaser_id',
         'name',
         'image',
         'brand',
         'price',
+        'condition',
         'description'
     ];
 
@@ -51,11 +54,12 @@ class Item extends Model
             }
         }
         
-        if($itemCategory->id != $category_id)
-        {
-            $returnTxt ="no";
+            if($itemCategory->id != $category_id)
+            {
+                $returnTxt ="no";
 
-            return $returnTxt;
+                return $returnTxt;
+            }
         }
     }
-}
+
