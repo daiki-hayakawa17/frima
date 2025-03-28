@@ -7,12 +7,16 @@
 @section('content')
 <div class="sell__content">
     <h2 class="sell__title">商品の出品</h2>
-    <form class="sell__form">
+    <form class="sell__form" action="/sell" method="post" enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" name="seller_id" value="{{ Auth::id() }}">
         <div class="form__input--image">
             <span class="form__input--label">商品画像</span>
             <div class="image__content">
-                <output id="image" class="image__output"></output>
-                <label for="item__image">画像を選択する</label>
+                <label class="output__label" for="item__image">
+                    <output id="image" class="image__output"></output>
+                </label>
+                <label class="input__label" for="item__image">画像を選択する</label>
                 <input type="file" id="item__image" name="item__image">
             </div>
         </div>
@@ -24,7 +28,7 @@
                 <div class="form__input--category">
                     @foreach($categories as $category)
                     <label>
-                        <input type="checkbox" name="category" value="{{$category->content}}">
+                        <input type="checkbox" id="categories" name="categories[]" value="{{$category->id}}">
                         <span>{{$category->content}}</span>
                     </label>
                     @endforeach
@@ -67,7 +71,7 @@
             <div class="form__group">
                 <span class="form__input--label">販売価格</span>
                 <div class="form__input--text">
-                    <input type="text" name="price" value="￥">
+                    <input type="text" name="price">
                 </div>
             </div>
         </div>

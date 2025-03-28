@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Category;
-use App\Models\Condition;
+
 
 class ItemController extends Controller
 {
@@ -32,21 +32,11 @@ class ItemController extends Controller
         return view('purchase', compact('item'));
     }
 
-    // public function loginView()
-    // {
-    //     return view('auth.login');
-    // }
-
     public function registerView()
     {
         return view('auth.register');
     }
-
-    // public function profileRegister()
-    // {
-    //     return view('profile');
-    // }
-
+    
     public function sellView()
     {
         $categories = Category::all();
@@ -54,10 +44,28 @@ class ItemController extends Controller
         return view('sell', compact('categories'));
     }
 
-    // public function addressView($item_id)
-    // {
-    //     return view('address');
-    // }
+    public function itemRegister(Request $request)
+    {
+        $dir = 'images';
+
+        $file = $request->file('item__image');
+        $file_name = $file->getClientOriginalName();
+        $request->file('item__image')->storeAs('public/' . $dir, $file_name);
+
+        $item_data = $request->only('seller_id',  'name', 'image', 'price', 'condition', 'brand', 'description');
+        $image = 'storage/' . $dir . '/' . $file_name;
+        $item_data['image'] = $image;
+
+        $category = $request->categories;
+
+        $item = Item::create($item_data);
+        $item->categories()->attach($category);
+
+        $items = Item::paginate(8);
+
+        // dd($category);
+        return redirect('/');
+    }
 
     public function mypageView()
     {
