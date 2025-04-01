@@ -10,13 +10,14 @@ class Delivery extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'post',
         'address',
         'building',
     ];
 
-    public function user()
+    public function item()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Item::class);
     }
 }

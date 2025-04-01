@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\Delivery;
 
 class AuthController extends Controller
 {
@@ -26,7 +27,7 @@ class AuthController extends Controller
         $image = 'storage/' . $dir . '/' . $file_name;
         $profile_data['image'] = $image;
         
-
+        $delivery = $request->only('user_id','post', 'address', 'building');
 
         Profile::updateOrCreate(
             ['user_id' => $request['user_id']], 
@@ -40,11 +41,10 @@ class AuthController extends Controller
             ]
         );
 
+        Delivery::create($delivery);
+
         return redirect('/');
     }
 
-    public function addressView($item_id)
-    {
-        return view('address');
-    }
+    
 }
