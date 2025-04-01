@@ -10,6 +10,7 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
+        'delivery_id',
         'seller_id',
         'purchaser_id',
         'name',
@@ -34,6 +35,11 @@ class Item extends Model
     public function likes()
     {
         return $this->hasMany(Like::class, 'item_id');
+    }
+
+    public function deliveries()
+    {
+        return $this->belongsTo(Delivery::class);
     }
 
     public function checkCategory($category,$item)

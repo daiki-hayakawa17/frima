@@ -34,8 +34,8 @@
                 <a class="destination__link" href="/purchase/address/{{$item->id}}">変更する</a>
             </div>
             <div class="address__content">    
-                <p>（仮）〒 XXX-YYYY</p>
-                <p>(仮)ここには住所と建物が入ります</p>
+                <p>{{$delivery->post}}</p>
+                <p>{{$delivery->address}} {{$delivery->building}}</p>
             </div>
             <div class="under__line--address"></div>
         </div>
