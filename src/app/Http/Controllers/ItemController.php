@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Category;
 use App\Models\Delivery;
+use App\Models\Profile;
 
 
 class ItemController extends Controller
@@ -29,10 +30,25 @@ class ItemController extends Controller
     {
         $item = Item::find($item_id);
 
-        $delivery = Delivery::where('user_id', \Auth::user()->id)->first(['post', 'address', 'building']);
+        $delivery = Delivery::where('user_id', \Auth::user()->id)->first(['id', 'post', 'address', 'building']);
         
         // dd($item_id);
         return view('purchase', compact('item', 'delivery'));
+    }
+
+    public function buy($item_id, Request $request)
+    {
+        $item = Item::find($item_id);
+
+        $purchaser_id = $request['user_id'];
+        $item['purchaser_id'] = $purchaser_id;
+
+        $delivery_id = $request['delivery_id'];
+        $item['delivery_id'] = $delivery_id;
+
+        $item->save();
+
+        return redirect('/');
     }
 
     public function addressView($item_id)
