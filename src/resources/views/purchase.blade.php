@@ -5,7 +5,9 @@
 @endsection
 
 @section('content')
-<form class="purchase__form">
+<form class="purchase__form" action="/purchase/{{$item->id}}" method="post">
+    @csrf
+    <input type="hidden" name="user_id" value="{{ Auth::id() }}">
     <div class="left__content">
         <div class="left__content--item">
             <div class="item__image">
@@ -33,9 +35,13 @@
                 <h3>配送先</h3>
                 <a class="destination__link" href="/purchase/address/{{$item->id}}">変更する</a>
             </div>
-            <div class="address__content">    
+            <div class="address__content">
+                <input type="hidden" name="delivery_id" value="{{$delivery->id}}">    
                 <p>{{$delivery->post}}</p>
+                <input type="hidden" name="post" value="{{$delivery->post}}">
                 <p>{{$delivery->address}} {{$delivery->building}}</p>
+                <input type="hidden" name="address" value="{{$delivery->address}}">
+                <input type="hidden" name="building" value="{{$delivery->building}}">
             </div>
             <div class="under__line--address"></div>
         </div>

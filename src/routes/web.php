@@ -21,6 +21,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function() {
     Route::get('/purchase/{item_id}', [ItemController::class, 'purchase'])->name('purchase');
+    Route::post('/purchase/{item_id}', [ItemController::class, 'buy']);
     Route::get('/mypage/profile', [AuthController::class, 'profileView']);
     Route::get('/purchase/address/{item_id}', [ItemController::class, 'addressView']);
     Route::post('/purchase/address/{item_id}', [ItemController::class, 'addressUpdate']);
