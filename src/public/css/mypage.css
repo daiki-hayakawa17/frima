@@ -1,0 +1,106 @@
+.mypage__profile {
+    display: flex;
+    vertical-align: middle;
+    margin-top: 78px;
+    align-items: center;
+}
+
+.profile__icon {
+    margin-left: 300px;
+}
+
+.profile__icon img {
+    width: 150px;
+    height: 150px;
+    border-radius: 150px;
+}
+
+.profile__name {
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 100%;
+    margin-left: 57px;
+    align-content: center;
+    text-align: center;
+}
+
+.profile__link {
+    display: block;
+    text-decoration: none;
+    width: 310px;
+    height: 59px;
+    border: solid 2px #ff5555;
+    border-radius: 10px;
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 100%;
+    color: #ff5555;
+    align-content: center;
+    text-align: center;
+    margin-left: 250px;
+}
+
+.list__nav ul {
+    margin-left: 129px;
+    margin-top: 77px;
+}
+
+.list__nav li {
+    list-style: none;
+    display: inline-block;
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 100%;
+    color: #5f5f5f;
+}
+
+.list__nav li:last-child {
+    margin-left: 52px;
+}
+
+.list__nav li.active {
+    color: #ff0000;
+}
+
+.tab__body--elem {
+    display: flex;
+    margin-left: 69px;
+    margin-top: 76px;
+    flex-wrap: wrap;
+}
+
+.item__content {
+    width: 290px;
+    height: 320px;
+    margin-right: 71px;
+    margin-bottom: 76px;
+}
+
+.item__content img {
+    width: 100%;
+    height: 290px;
+}
+
+.detail__content {
+    width: 290px;
+    height: 30px;
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 25px;
+    line-height: 30.26px;
+}
+
+.item__content a {
+    text-decoration: none;
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 25px;
+    line-height: 30.26px;
+    color: #000;
+}
