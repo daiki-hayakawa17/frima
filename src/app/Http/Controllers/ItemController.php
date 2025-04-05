@@ -112,6 +112,11 @@ class ItemController extends Controller
 
     public function mypageView()
     {
-        
+        $items = Item::all();
+
+        $profile = Profile::where('user_id', \Auth::user()->id)->first(['id', 'image', 'name']);
+
+        // dd($profile);
+        return view('mypage', compact('items', 'profile'));
     }
 }
