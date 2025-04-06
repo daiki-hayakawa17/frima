@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function() {
 });
 Route::get('/', [ItemController::class, 'index']);
 
+Route::get('/search', [ItemController::class, 'search']);
+
 Route::get('/item/{item_id}', [ItemController::class, 'detail']);
 
 Route::get('/register', [ItemController::class, 'registerView']);

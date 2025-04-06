@@ -122,4 +122,12 @@ class ItemController extends Controller
         // dd($profile);
         return view('mypage', compact('items', 'profile'));
     }
+
+    public function search(Request $request)
+    {
+        $items = Item::with('categories')->KeywordSearch($request->keyword)->paginate(8);
+
+
+        return view('index', compact('items'));
+    }
 }
