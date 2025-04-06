@@ -20,8 +20,8 @@ class CreateProfilesTable extends Migration
             $table->string('name');
             $table->string('post');
             $table->string('address');
-            $table->string('building');
-            $table->tinyinteger('pay')->default(1);
+            $table->string('building')->nullable();
+            $table->tinyinteger('pay')->nullable();
             $table->timestamps();
         });
     }

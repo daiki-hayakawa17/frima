@@ -6,15 +6,19 @@ use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\Delivery;
+use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\AddressRequest;
 
 class AuthController extends Controller
 {
     public function profileView()
     {
+        
+
         return view('profile');
     }
 
-    public function profileRegister(Request $request, Profile $profile)
+    public function profileRegister(ProfileRequest $request, Profile $profile)
     {
         $dir = 'images';
 

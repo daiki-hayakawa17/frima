@@ -15,11 +15,21 @@
             <div class="form__input--text">
                 <input type="text" name="post">
             </div>
+            <div class="form__error">
+                @error('post')
+                {{ $message }}
+                @enderror
+            </div>
         </div>
         <div class="form__group--address">
             <span class="form__input--label">住所</span>
             <div class="form__input--text">
                 <input type="text" name="address">
+            </div>
+            <div class="form__error">
+                @error('address')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__group--building">

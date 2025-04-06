@@ -19,6 +19,11 @@
                 <label class="input__label" for="item__image">画像を選択する</label>
                 <input type="file" id="item__image" name="item__image">
             </div>
+            <div class="form__error">
+                @error('item__image')
+                {{ $message }}
+                @enderror
+            </div>
         </div>
         <div class="form__item--detail">
             <h3 class="item__subtitle">商品の詳細</h3>
@@ -33,6 +38,11 @@
                     </label>
                     @endforeach
                 </div>
+                <div class="form__error">
+                    @error('categories')
+                    {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="item__detail--condition">
                 <span class="form__input--label">商品の状態</span>
@@ -45,6 +55,11 @@
                         <option value="4">状態が悪い</option>
                     </select>
                 </div>
+                <div class="form__error">
+                    @error('condition')
+                    {{ $message }}
+                    @enderror
+                </div>
             </div>
         </div>
         <div class="item__description">
@@ -54,6 +69,11 @@
                 <span class="form__input--label">商品名</span>
                 <div class="form__input--text">
                     <input type="text" name="name">
+                </div>
+                <div class="form__error">
+                    @error('name')
+                    {{ $message }}
+                    @enderror
                 </div>
             </div>
             <div class="form__group">
@@ -67,11 +87,21 @@
                 <div class="form__input--text">
                     <textarea name="description"  cols="30" ros="5"></textarea>
                 </div>
+                <div class="form__error">
+                    @error('description')
+                    {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="form__group">
                 <span class="form__input--label">販売価格</span>
                 <div class="form__input--text">
                     <input type="text" name="price">
+                </div>
+                <div class="form__error">
+                    @error('price')
+                    {{ $message }}
+                    @enderror
                 </div>
             </div>
         </div>

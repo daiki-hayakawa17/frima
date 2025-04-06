@@ -28,6 +28,11 @@
                     <option value="2">カード支払い</option>
                 </select>
             </div>
+            <div class="form__error">
+                @error('pay')
+                {{ $message }}
+                @enderror
+            </div>
             <div class="under__line--pay"></div>
         </div>
         <div class="left__content--address">
@@ -37,11 +42,16 @@
             </div>
             <div class="address__content">
                 <input type="hidden" name="delivery_id" value="{{$delivery->id}}">    
-                <p>{{$delivery->post}}</p>
+                <p>〒 {{$delivery->post}}</p>
                 <input type="hidden" name="post" value="{{$delivery->post}}">
                 <p>{{$delivery->address}} {{$delivery->building}}</p>
                 <input type="hidden" name="address" value="{{$delivery->address}}">
                 <input type="hidden" name="building" value="{{$delivery->building}}">
+            </div>
+            <div class="form__error">
+                @error('delivery_id')
+                {{ $message }}
+                @enderror
             </div>
             <div class="under__line--address"></div>
         </div>
