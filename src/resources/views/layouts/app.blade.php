@@ -17,9 +17,9 @@
         <a class="header__title" href="/">
             <img src="{{ asset('/images/logo.svg') }}" class="header__logo">
         </a>
-        <div class="header__search">
-            <input type="text" name="name" placeholder="なにをお探しですか?">
-        </div>
+        <form class="header__search" action="/search" method="get">
+            <input type="text" name="keyword" value="{{ old('keyword') }}" placeholder="なにをお探しですか?">
+        </form>
         <nav class="header__nav">
             <ul class="header__nav--list">
                 @if (Auth::check())

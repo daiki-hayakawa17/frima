@@ -60,12 +60,19 @@ class Item extends Model
             }
         }
         
-            if($itemCategory->id != $category_id)
-            {
-                $returnTxt ="no";
+        if($itemCategory->id != $category_id)
+        {
+            $returnTxt ="no";
 
-                return $returnTxt;
-            }
+            return $returnTxt;
         }
     }
+
+    public function scopeKeywordSearch($query, $keyword)
+    {
+        if (!empty($keyword)){
+            $query->where('name', 'like', '%' . $keyword . '%');
+        }
+    }
+}
 
