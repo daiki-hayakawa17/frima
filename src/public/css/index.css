@@ -62,3 +62,16 @@
     line-height: 30.26px;
     color: #000;
 }
+
+.sold__item {
+    display: block;
+    width: 290px;
+    height: 320px;
+    margin-right: 71px;
+    margin-bottom: 76px;
+    text-align: center;
+    align-content: center;
+    font-family: "Inter", serif;
+    font-style: normal;
+    font-size: 35px;
+}

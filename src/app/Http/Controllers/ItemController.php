@@ -7,6 +7,9 @@ use App\Models\Item;
 use App\Models\Category;
 use App\Models\Delivery;
 use App\Models\Profile;
+use App\Http\Requests\AddressRequest;
+use App\Http\Requests\ExhibitionRequest;
+use App\Http\Requests\PurchaseRequest;
 
 
 class ItemController extends Controller
@@ -32,11 +35,11 @@ class ItemController extends Controller
 
         $delivery = Delivery::where('user_id', \Auth::user()->id)->first(['id', 'post', 'address', 'building']);
         
-        // dd($item_id);
+        // dd($delivery);
         return view('purchase', compact('item', 'delivery'));
     }
 
-    public function buy($item_id, Request $request)
+    public function buy($item_id, PurchaseRequest $request)
     {
         $item = Item::find($item_id);
 
@@ -59,7 +62,7 @@ class ItemController extends Controller
         return view('address', compact('item'));
     }
 
-    public function addressUpdate($item_id, Request $request)
+    public function addressUpdate($item_id, AddressRequest $request)
     {
         
         $item = Item::find($item_id);
@@ -87,7 +90,7 @@ class ItemController extends Controller
         return view('sell', compact('categories'));
     }
 
-    public function itemRegister(Request $request)
+    public function itemRegister(ExhibitionRequest $request)
     {
         $dir = 'images';
 

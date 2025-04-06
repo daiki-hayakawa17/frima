@@ -13,30 +13,50 @@
         <div class="form__input--image">
             <output id="image" class="image__output"></output>
             <label for="profile__image">画像を選択する</label>
-            <input type="file" id="profile__image" name="image">
+            <input type="file" id="profile__image" name="image" value="{{ old('image') }}">
+        </div>
+        <div class="form__error">
+            @error('image')
+            {{ $message }}
+            @enderror
         </div>
         <div class="form__group">
             <span class="form__input--label">ユーザー名</span>
             <div class="form__input--text">
-                <input type="text" name="name">
+                <input type="text" name="name" value="{{ old('name') }}">
+            </div>
+            <div class="form__error">
+                @error('name')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__group">
             <span class="form__input--label">郵便番号</span>
             <div class="form__input--text">
-                <input type="text" name="post">
+                <input type="text" name="post" value="{{ old('post') }}">
             </div>
         </div>
+        <div class="form__error">
+                @error('post')
+                {{ $message }}
+                @enderror
+            </div>
         <div class="form__group">
             <span class="form__input--label">住所</span>
             <div class="form__input--text">
-                <input type="text" name="address">
+                <input type="text" name="address" value="{{ old('address') }}">
+            </div>
+            <div class="form__error">
+                @error('address')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__group">
             <span class="form__input--label">建物名</span>
             <div class="form__input--text">
-                <input type="text" name="building">
+                <input type="text" name="building" value="{{ old('building') }}">
             </div>
         </div>
         <div class="form__button">
