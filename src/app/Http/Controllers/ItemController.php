@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\Category;
 use App\Models\Delivery;
 use App\Models\Profile;
+use App\Models\Like;
 use App\Http\Requests\AddressRequest;
 use App\Http\Requests\ExhibitionRequest;
 use App\Http\Requests\PurchaseRequest;
@@ -129,5 +131,24 @@ class ItemController extends Controller
 
 
         return view('index', compact('items'));
+    }
+
+    public function like($item_id)
+    {
+        Like::create([
+            'item_id' => $item_id,
+            'user_id' => Auth::id(),
+        ]);
+
+        // dd($item_id);
+        return redirect(route('detail', $item_id));
+    }
+
+    public function unlike($item_id)
+    {
+        $like = Like::where('item_id', $item_id)->where('user_id', Auth::id())->first();
+        $like->delete();
+
+        return redirect(route('detail', $item_id));
     }
 }

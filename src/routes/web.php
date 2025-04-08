@@ -28,12 +28,14 @@ Route::middleware('auth')->group(function() {
     Route::post('/purchase/address/{item_id}', [ItemController::class, 'addressUpdate']);
     Route::get('/sell', [ItemController::class, 'sellView']);
     Route::post('/sell', [ItemController::class, 'itemRegister']);
+    Route::post('/like/{item_id}', [ItemController::class, 'like'])->name('item.like');
+    Route::post('/unlike/{item_id}', [ItemController::class, 'unlike'])->name('item.unlike');
 });
 Route::get('/', [ItemController::class, 'index']);
 
 Route::get('/search', [ItemController::class, 'search']);
 
-Route::get('/item/{item_id}', [ItemController::class, 'detail']);
+Route::get('/item/{item_id}', [ItemController::class, 'detail'])->name('detail');
 
 Route::get('/register', [ItemController::class, 'registerView']);
 
