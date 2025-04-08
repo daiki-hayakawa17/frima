@@ -25,9 +25,29 @@
                 </p>
                 <input type="hidden" name="price" value="{{$item->price}}">
                 <div class="icons">
-                    <button class="like__button">
-                        <img src="{{ asset('storage/images/like-button.png') }}" alt="いいねボタン">
-                    </button>
+                    <div class="like__button">
+                        @if($item->is_liked_by_auth_user())
+                            <form class="unlike__button" action="/unlike/{{$item->id}}" method="post">
+                                @csrf
+                                <button class="unlike__button--submit">
+                                    <img src="{{ asset('storage/images/like-button.png') }}" alt="いいねボタン">
+                                </button>
+                                <span class="like__count">
+                                {{ $item->likes->count() }}
+                                </span>
+                            </form>
+                        @else
+                            <form class="like__button" action="/like/{{$item->id}}" method="post">
+                                @csrf
+                                <button class="like__button--submit">
+                                    <img src="{{ asset('storage/images/like-button.png') }}" alt="いいねボタン">
+                                </button>
+                                <span class="like__count">
+                                {{ $item->likes->count() }}
+                                </span>
+                            </form>
+                        @endif
+                    </div>
                     <div class="comment__icon">
                         <img src="{{ asset('storage/images/comment-icon.png') }}" alt="コメントアイコン">
                     </div>
