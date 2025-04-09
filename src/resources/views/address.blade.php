@@ -13,7 +13,7 @@
         <div class="form__group--post">
             <span class="form__input--label">郵便番号</span>
             <div class="form__input--text">
-                <input type="text" name="post">
+                <input type="text" name="post" value="{{ $delivery->post }}">
             </div>
             <div class="form__error">
                 @error('post')
@@ -24,7 +24,7 @@
         <div class="form__group--address">
             <span class="form__input--label">住所</span>
             <div class="form__input--text">
-                <input type="text" name="address">
+                <input type="text" name="address" value="{{ $delivery->address }}">
             </div>
             <div class="form__error">
                 @error('address')
@@ -35,7 +35,7 @@
         <div class="form__group--building">
             <span class="form__input--label">建物名</span>
             <div class="form__input--text">
-                <input type="text" name="building">
+                <input type="text" name="building" value="{{ $delivery->building }}">
             </div>
         </div>
         <div class="form__button">

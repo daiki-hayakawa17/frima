@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function() {
     Route::post('/sell', [ItemController::class, 'itemRegister']);
     Route::post('/like/{item_id}', [ItemController::class, 'like'])->name('item.like');
     Route::post('/unlike/{item_id}', [ItemController::class, 'unlike'])->name('item.unlike');
+    Route::post('/comments/{item_id}', [ItemController::class, 'comment']);
 });
 Route::get('/', [ItemController::class, 'index']);
 

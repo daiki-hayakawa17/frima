@@ -50,6 +50,9 @@
                     </div>
                     <div class="comment__icon">
                         <img src="{{ asset('storage/images/comment-icon.png') }}" alt="コメントアイコン">
+                        <span class="like__count">
+                            {{ $item->comments->count() }}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -97,7 +100,36 @@
             </div>
         </div>
         <div class="item__comment">
-
+            <h2 class="comment__title">コメント（{{ $item->comments->count() }}）</h2>
+            @if (isset($comment))
+            <div class="comment__user">
+                <div class="comment__user--profile">
+                    <img src="{{ asset($profile->image) }}" alt="プロフィール画像" class="img-content">
+                    <p class="comment__user--name">{{ $profile->name }}</p>
+                </div>
+                <div class="comment__user--content">
+                    <p class="comment">{{ $comment->comment }}</p>
+                </div>
+            </div>
+            @else
+            <div class="hidden"></div>
+            @endif
+            <form class="comment__form" action="/comments/{{$item->id}}" method=post>
+                @csrf
+                <div class="form__group">
+                    <span class="form__input--label">商品へのコメント</span>
+                    <div class="form__input--text">
+                        <input type="hidden" name="item_id" value="{{ $item->id }}">
+                        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                        <textarea name="comment"></textarea>
+                    </div>
+                </div>
+                <div class="comment__button">
+                    <button class="comment__button--submit">
+                        コメントを送信する
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

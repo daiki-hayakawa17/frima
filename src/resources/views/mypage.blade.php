@@ -36,6 +36,7 @@
                 @endif
             @endforeach
         </div>
+        {{ $items->links() }}
         <div class="tab__body--elem" id="tab-page2">
             @foreach ($items as $item)
                 @if ($item['purchaser_id'] === Auth::id() )
@@ -50,6 +51,7 @@
                 @endif
             @endforeach
         </div>
+        {{ $items->links() }}
     </div>
 </div>
 @endsection
