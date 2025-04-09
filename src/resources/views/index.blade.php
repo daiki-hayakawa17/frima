@@ -12,7 +12,9 @@
 
 <div class="item__contents">
     @foreach ($items as $item)
-        @if (empty($item['purchaser_id']))
+        @if ($item['seller_id'] == Auth::id())
+            <div class="hidden"></div>
+        @elseif (empty($item['purchaser_id']))
             <div class="item__content">
                 <a href="/item/{{$item->id}}" class="item__link">
                     <img src="{{ asset($item->image) }}" alt="商品画像" class="img__content">
@@ -21,8 +23,6 @@
                     </div>
                 </a>
             </div>
-        @elseif ($item['seller_id'] === Auth::id())
-            <div class="hidden"></div>
         @else 
             <div class="sold__item">
                 <p>sold</p>

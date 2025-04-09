@@ -267,3 +267,94 @@
     text-align: center;
     vertical-align: middle;
 }
+
+.item__comment {
+    width: 570px;
+}
+
+.comment__title {
+    width: 100%;
+    height: 100px;
+    font-family: "Inter", serif;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 100%;
+    color: #5F5F5F;
+}
+
+.comment__user {
+    width: 100%;
+    height: 200px;
+}
+
+.comment__user--profile {
+    display: flex;
+    align-items: center;
+}
+
+.comment__user--profile img {
+    width: 70px;
+    height: 70px;
+    border-radius: 70px;
+    margin-right: 18px;
+}
+
+.comment__user--name {
+    font-family: "Inter", serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 100%;
+}
+
+.comment__user--content {
+    margin-top: 19px;
+    width: 100%;
+    height: 70px;
+    background-color: #E5E5E5;
+    border-radius: 5px;
+    align-content: center;
+}
+
+.comment {
+    font-family: "Inter", serif;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 100%;
+}
+
+.form__input--label {
+    margin-top: 41px;
+    display: block;
+    width: 100%;
+    height: 50px;
+    font-family: "Inter", serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 100%;
+}
+
+.form__input--text textarea {
+    width: 100%;
+    height: 246px;
+    border: 2px solid #5f5f5f;
+    border-radius: 5px;
+}
+
+.comment__button {
+    width: 100%;
+    height: 100px;
+    margin-top: 26px;
+}
+
+.comment__button--submit {
+    width: 100%;
+    height: 56px;
+    background-color: #ff5555;
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    font-family: "Inter", serif;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 100%;
+}

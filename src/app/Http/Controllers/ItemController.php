@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Delivery;
 use App\Models\Profile;
 use App\Models\Like;
+use App\Models\Comment;
 use App\Http\Requests\AddressRequest;
 use App\Http\Requests\ExhibitionRequest;
 use App\Http\Requests\PurchaseRequest;
@@ -28,7 +29,26 @@ class ItemController extends Controller
         $item = Item::find($item_id);
         $categories = Category::all();
 
-        return view('detail', compact('item', 'categories'));
+        $comment_user = Comment::where('item_id', $item_id)->first('id', 'user_id');
+
+        if (isset($comment_user)){
+            $comment_id = $comment_user['id'];
+
+            $comment = Comment::find($comment_id);
+
+
+            $user_id = $comment['user_id'];
+        
+            $profile = Profile::find($user_id);
+
+            return view('detail', compact('item', 'categories', 'profile', 'comment'));
+        } else {
+            $comment = null;
+
+            $profile = null;
+
+            return view('detail', compact('item', 'categories', 'profile', 'comment'));
+        }
     }
 
     public function purchase($item_id)
@@ -60,8 +80,10 @@ class ItemController extends Controller
     {
         $item = Item::find($item_id);
 
+        $delivery = Delivery::where('user_id', \Auth::user()->id)->first(['id', 'post', 'address', 'building']);
+
         // dd($item);
-        return view('address', compact('item'));
+        return view('address', compact('item', 'delivery'));
     }
 
     public function addressUpdate($item_id, AddressRequest $request)
@@ -117,7 +139,7 @@ class ItemController extends Controller
 
     public function mypageView()
     {
-        $items = Item::all();
+        $items = Item::paginate(8);
 
         $profile = Profile::where('user_id', \Auth::user()->id)->first(['id', 'image', 'name']);
 
@@ -148,6 +170,19 @@ class ItemController extends Controller
     {
         $like = Like::where('item_id', $item_id)->where('user_id', Auth::id())->first();
         $like->delete();
+
+        return redirect(route('detail', $item_id));
+    }
+
+    public function comment($item_id, Request $request)
+    {
+        $item = Item::find($item_id);
+
+        $comment = new Comment();
+        $comment->comment = $request->comment;
+        $comment->item_id = $item_id;
+        $comment->user_id = Auth::user()->id;
+        $comment->save();
 
         return redirect(route('detail', $item_id));
     }
