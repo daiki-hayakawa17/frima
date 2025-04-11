@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="list__nav">
+<div class="list__nav" id="list__nav">
     <p class="list__nav--text">おすすめ</p>
     <p class="list__nav--mylist">マイリスト</p>
 </div>
@@ -30,5 +30,5 @@
         @endif
     @endforeach
 </div>
-{{ $items->links() }}
+{{ $items->links('pagination::default') }}
 @endsection
