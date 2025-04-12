@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function() {
     Route::post('/unlike/{item_id}', [ItemController::class, 'unlike'])->name('item.unlike');
     Route::post('/comments/{item_id}', [ItemController::class, 'comment']);
 });
-Route::get('/', [ItemController::class, 'index']);
+Route::get('/', [ItemController::class, 'index'])->name('index');
 
 Route::get('/search', [ItemController::class, 'search']);
 

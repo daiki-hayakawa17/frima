@@ -19,7 +19,20 @@ class ItemController extends Controller
 {
     public function index()
     {
-        $items = Item::paginate(8);
+        $page = request()->query('page');
+
+        if ($page === 'mylist') {
+            $user = Auth::user();
+            if (isset($user)) {
+                $items = $user->likes()->paginate(8);
+            } else {
+                $items = null;
+            }
+            // dd($items);
+        } else {
+            $items = Item::paginate(8);
+        }
+        
         
         return view('index', compact('items'));
     }

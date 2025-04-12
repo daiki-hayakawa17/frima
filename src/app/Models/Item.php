@@ -85,6 +85,7 @@ class Item extends Model
         $id = Auth::id();
 
         $likers = array();
+        // dd($this->likes);
         foreach($this->likes as $like) {
             array_push($likers, $like->user_id);
         }
@@ -94,6 +95,7 @@ class Item extends Model
         } else {
             return false;
         }
+       
     }
 }
 
