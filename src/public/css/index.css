@@ -26,7 +26,7 @@
     line-height: 29.05px;
 }
 
-.item__contents {
+.item__content--inner {
     display: flex;
     margin-left: 69px;
     margin-top: 76px;

@@ -8,14 +8,16 @@ use App\Models\User;
 use App\Models\Delivery;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\AddressRequest;
+use Session;
 
 class AuthController extends Controller
 {
     public function profileView()
     {
-        
+        $profile = Profile::where('user_id', \Auth::user()->id)->first(['id', 'image', 'name', 'post', 'address', 'building']);
 
-        return view('profile');
+        // dd($profile);
+        return view('profile', compact('profile'));
     }
 
     public function profileRegister(ProfileRequest $request, Profile $profile)
