@@ -13,6 +13,7 @@ use App\Models\Comment;
 use App\Http\Requests\AddressRequest;
 use App\Http\Requests\ExhibitionRequest;
 use App\Http\Requests\PurchaseRequest;
+use App\Http\Requests\CommentRequest;
 
 
 class ItemController extends Controller
@@ -187,7 +188,7 @@ class ItemController extends Controller
         return redirect(route('detail', $item_id));
     }
 
-    public function comment($item_id, Request $request)
+    public function comment($item_id, CommentRequest $request)
     {
         $item = Item::find($item_id);
 

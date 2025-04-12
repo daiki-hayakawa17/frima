@@ -6,8 +6,12 @@
 
 @section('content')
 <div class="list__nav" id="list__nav">
-    <a href="{{ route('index') }}" class="list__nav--text">おすすめ</a>
-    <a href="{{ route('index', ['page' => 'mylist']) }}" class="list__nav--mylist">マイリスト</a>
+    <a href="{{ route('index') }}" class="list__nav--text" id="navButton">
+        <p id="text">おすすめ</p>
+    </a>
+    <a href="{{ route('index', ['page' => 'mylist']) }}" class="list__nav--text mylist" id="navButton">
+        <p id="text">マイリスト</p>
+    </a>
 </div>
 
 <div class="item__contents">
@@ -37,5 +41,17 @@
         <div class="hidden"></div>
     @endif
 </div>
+@endsection
 
+@section('script')
+<script>
+    document.querySelectorAll('.list__nav--text').forEach(link => {
+        link.addEventListener('click', function(){
+
+            document.querySelectorAll('.list__nav--text').forEach(l => l.classList.remove('active'));
+
+            this.classList.add('active');
+        });
+    });
+</script>
 @endsection
