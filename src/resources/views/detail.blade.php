@@ -123,6 +123,11 @@
                         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                         <textarea name="comment"></textarea>
                     </div>
+                    <div class="form__error">
+                        @error('comment')
+                        {{ $message }}
+                        @enderror
+                    </div>
                 </div>
                 <div class="comment__button">
                     <button class="comment__button--submit">
