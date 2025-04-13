@@ -6,11 +6,11 @@
 
 @section('content')
 <div class="list__nav" id="list__nav">
-    <a href="{{ route('index') }}" class="list__nav--text" id="navButton">
-        <p id="text">おすすめ</p>
+    <a href="{{ route('index') }}" class="list__nav--text">
+        おすすめ
     </a>
-    <a href="{{ route('index', ['page' => 'mylist']) }}" class="list__nav--text mylist" id="navButton">
-        <p id="text">マイリスト</p>
+    <a href="{{ route('index', ['page' => 'mylist']) }}" class="list__nav--text mylist">
+        マイリスト
     </a>
 </div>
 
@@ -36,7 +36,6 @@
             @endif
         @endforeach
     </div>
-    {{ $items->links('pagination::default') }}
     @else
         <div class="hidden"></div>
     @endif

@@ -25,13 +25,13 @@ class ItemController extends Controller
         if ($page === 'mylist') {
             $user = Auth::user();
             if (isset($user)) {
-                $items = $user->likes()->paginate(8);
+                $items = $user->likes()->get();
             } else {
                 $items = null;
             }
             // dd($items);
         } else {
-            $items = Item::paginate(8);
+            $items = Item::all();
         }
         
         
@@ -153,7 +153,16 @@ class ItemController extends Controller
 
     public function mypageView()
     {
-        $items = Item::paginate(8);
+        $mypage = request()->query('mypage', 'sell');
+        $user_id = Auth::id();
+        if ($mypage === 'buy') {
+            $items = Item::where('purchaser_id', $user_id)->get();
+            // dd($items);
+        } elseif ($mypage === 'sell') {
+            $items = Item::where('seller_id', $user_id)->get();
+        } else {
+            $items = null;
+        }
 
         $profile = Profile::where('user_id', \Auth::user()->id)->first(['id', 'image', 'name']);
 
