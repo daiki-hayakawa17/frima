@@ -44,12 +44,12 @@
     margin-left: 250px;
 }
 
-.list__nav ul {
+.list__nav {
     margin-left: 129px;
     margin-top: 77px;
 }
 
-.list__nav li {
+.list__nav {
     list-style: none;
     display: inline-block;
     font-family: "Inter", serif;
@@ -60,7 +60,12 @@
     color: #5f5f5f;
 }
 
-.list__nav li:last-child {
+.list__nav--text {
+    text-decoration: none;
+    color: #5f5f5f;
+}
+
+.buy{
     margin-left: 52px;
 }
 
@@ -68,7 +73,7 @@
     color: #ff0000;
 }
 
-.tab__body--elem {
+.item__contents--inner {
     display: flex;
     margin-left: 69px;
     margin-top: 76px;
