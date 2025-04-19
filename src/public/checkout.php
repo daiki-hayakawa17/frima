@@ -11,7 +11,7 @@ $YOUR_DOMAIN = 'http://localhost:4242';
 $checkout_session = \Stripe\Checkout\Session::create([
   'line_items' => [[
     # Provide the exact Price ID (e.g. price_1234) of the product you want to sell
-    'price' => '{{PRICE_ID}}',
+    'price' => 'price_1REoUsC2v5OUbScDCF8i2JzJ',
     'quantity' => 1,
   ]],
   'mode' => 'payment',
