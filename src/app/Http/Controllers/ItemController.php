@@ -87,7 +87,7 @@ class ItemController extends Controller
 
         $item->save();
 
-        return redirect('/');
+        return view('/checkout', compact('item'));
     }
 
     public function addressView($item_id)
