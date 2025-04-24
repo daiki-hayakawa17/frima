@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\AuthController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth', 'verified')->group(function() {
     Route::get('/purchase/{item_id}', [ItemController::class, 'purchase'])->name('purchase');
     Route::post('/purchase/{item_id}', [ItemController::class, 'buy']);
     Route::get('/mypage', [ItemController::class, 'mypageView'])->name('mypage');
@@ -41,3 +44,25 @@ Route::get('/item/{item_id}', [ItemController::class, 'detail'])->name('detail')
 Route::get('/register', [ItemController::class, 'registerView']);
 
 Route::post('/mypage/profile', [AuthController::class,'profileRegister']);
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill(); // 認証完了
+    return redirect('/mypage/profile');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('status', 'verification-link-sent');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::get('/test-mail',function () {
+    Mail::raw('テストメール', function ($message) {
+    $message->to('test@example.com')
+            ->subject('Mailhogテスト');
+    });
+    return 'メールを送信しました';
+});
