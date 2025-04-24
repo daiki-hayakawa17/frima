@@ -13,7 +13,7 @@
         <div class="form__input--image">
             <output id="image" class="image__output"></output>
             <label for="profile__image">画像を選択する</label>
-            <input type="file" id="profile__image" name="image" value="{{ $profile->image }}">
+            <input type="file" id="profile__image" name="image">
         </div>
         <div class="form__error">
             @error('image')
@@ -23,7 +23,7 @@
         <div class="form__group">
             <span class="form__input--label">ユーザー名</span>
             <div class="form__input--text">
-                <input type="text" name="name" value="{{ $profile->name }}">
+                <input type="text" name="name">
             </div>
             <div class="form__error">
                 @error('name')
@@ -34,7 +34,7 @@
         <div class="form__group">
             <span class="form__input--label">郵便番号</span>
             <div class="form__input--text">
-                <input type="text" name="post" value="{{ $profile->post }}">
+                <input type="text" name="post">
             </div>
         </div>
         <div class="form__error">
@@ -45,7 +45,7 @@
         <div class="form__group">
             <span class="form__input--label">住所</span>
             <div class="form__input--text">
-                <input type="text" name="address" value="{{ $profile->address }}">
+                <input type="text" name="address">
             </div>
             <div class="form__error">
                 @error('address')
@@ -56,7 +56,7 @@
         <div class="form__group">
             <span class="form__input--label">建物名</span>
             <div class="form__input--text">
-                <input type="text" name="building" value="{{ $profile->building }}">
+                <input type="text" name="building">
             </div>
         </div>
         <div class="form__button">
