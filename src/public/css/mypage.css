@@ -109,3 +109,7 @@
     line-height: 30.26px;
     color: #000;
 }
+
+.list__nav--text.active {
+    color: #ff0000;
+}

@@ -13,10 +13,10 @@
     <a class="profile__link" href="/mypage/profile">プロフィールを編集</a>
 </div>
 <div class="list__nav" id="list__nav">
-    <a href="{{ route('mypage', ['mypage' => 'sell']) }}" class="list__nav--text">
+    <a href="{{ route('mypage', ['mypage' => 'sell']) }}" class="list__nav--text {{ request('mypage') === 'sell' ? 'active' : '' }}">
         出品した商品
     </a>
-    <a href="{{ route('mypage', ['mypage' => 'buy']) }}" class="list__nav--text buy">
+    <a href="{{ route('mypage', ['mypage' => 'buy']) }}" class="list__nav--text buy {{ request('mypage') === 'buy' ? 'active' : '' }}">
         購入した商品
     </a>
 </div>

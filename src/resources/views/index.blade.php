@@ -6,10 +6,10 @@
 
 @section('content')
 <div class="list__nav" id="list__nav">
-    <a href="{{ route('index') }}" class="list__nav--text">
+    <a href="{{ route('index', ['keyword' => request('keyword')]) }}" class="list__nav--text {{ request('page') !== 'mylist' ? 'active' : '' }}">
         おすすめ
     </a>
-    <a href="{{ route('index', ['page' => 'mylist']) }}" class="list__nav--text mylist">
+    <a href="{{ route('index', ['page' => 'mylist' , 'keyword' => request('keyword')]) }}" class="list__nav--text mylist {{ request('page') === 'mylist' ? 'active' : '' }}">
         マイリスト
     </a>
 </div>
