@@ -18,20 +18,28 @@ use App\Http\Requests\CommentRequest;
 
 class ItemController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $page = request()->query('page');
+        $query = Item::with('categories');
+
+        if ($request->filled('keyword')) {
+            $query->KeywordSearch($request->keyword);
+        }
 
         if ($page === 'mylist') {
             $user = Auth::user();
             if (isset($user)) {
-                $items = $user->likes()->get();
+                $items = $user->likes()->when($request->filled('keyword'), function ($q) use ($request){
+                    $q->KeywordSearch($request->keyword);
+                })
+                ->get();
             } else {
                 $items = null;
             }
             // dd($items);
         } else {
-            $items = Item::all();
+            $items = $query->get();
         }
         
         
