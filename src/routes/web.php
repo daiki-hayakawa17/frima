@@ -34,6 +34,12 @@ Route::middleware('auth', 'verified')->group(function() {
     Route::post('/like/{item_id}', [ItemController::class, 'like'])->name('item.like');
     Route::post('/unlike/{item_id}', [ItemController::class, 'unlike'])->name('item.unlike');
     Route::post('/comments/{item_id}', [ItemController::class, 'comment']);
+    Route::get('/success', function () {
+        return view('success');
+    })->name('purchase.success');
+    Route::get('cancel', function () {
+        return view('cancel');
+    })->name('purchase.cancel');
 });
 Route::get('/', [ItemController::class, 'index'])->name('index');
 

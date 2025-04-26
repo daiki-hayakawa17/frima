@@ -12,7 +12,7 @@
         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
         <div class="form__input--image">
             <output id="image" class="image__output">
-                @if ($profile->image)
+                @if (isset($profile) && $profile->image)
                     <div class="reader_file">
                         <img class="reader_image" src="{{ asset($profile->image) }}">
                     </div>
@@ -29,7 +29,7 @@
         <div class="form__group">
             <span class="form__input--label">ユーザー名</span>
             <div class="form__input--text">
-                <input type="text" name="name" value="{{ $profile->name }}">
+                <input type="text" name="name" value="{{ $profile->name ?? '' }}">
             </div>
             <div class="form__error">
                 @error('name')
@@ -40,7 +40,7 @@
         <div class="form__group">
             <span class="form__input--label">郵便番号</span>
             <div class="form__input--text">
-                <input type="text" name="post" value="{{ $profile->post }}">
+                <input type="text" name="post" value="{{ $profile->post ?? '' }}">
             </div>
         </div>
         <div class="form__error">
@@ -51,7 +51,7 @@
         <div class="form__group">
             <span class="form__input--label">住所</span>
             <div class="form__input--text">
-                <input type="text" name="address" value="{{ $profile->address }}">
+                <input type="text" name="address" value="{{ $profile->address ?? '' }}">
             </div>
             <div class="form__error">
                 @error('address')
@@ -62,7 +62,7 @@
         <div class="form__group">
             <span class="form__input--label">建物名</span>
             <div class="form__input--text">
-                <input type="text" name="building" value="{{ $profile->building }}">
+                <input type="text" name="building" value="{{ $profile->building ?? '' }}">
             </div>
         </div>
         <div class="form__button">
