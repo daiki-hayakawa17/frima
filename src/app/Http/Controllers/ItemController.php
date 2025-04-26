@@ -14,6 +14,8 @@ use App\Http\Requests\AddressRequest;
 use App\Http\Requests\ExhibitionRequest;
 use App\Http\Requests\PurchaseRequest;
 use App\Http\Requests\CommentRequest;
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
 
 
 class ItemController extends Controller
@@ -95,7 +97,26 @@ class ItemController extends Controller
 
         $item->save();
 
-        return view('/checkout', compact('item'));
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        $session = Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => 'jpy',
+                    'product_data' => [
+                        'name' => $item->name,
+                    ],
+                    'unit_amount' => $item->price,
+                ],
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => route('purchase.success'),
+            'cancel_url' => route('purchase.cancel'),
+            ]);
+
+        return redirect($session->url);
     }
 
     public function addressView($item_id)
