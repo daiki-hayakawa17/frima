@@ -1,5 +1,27 @@
+.header {
+    width: 100%;
+    max-width: 1512px;
+    height: 82px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000;
+    padding: 22px 40px;
+    box-sizing: border-box;
+}
+
+.header__title {
+    flex-shrink: 0;
+}
+
+.header__title img {
+    width: 370px;
+    height: auto;
+}
+
 .register__form {
-    width: 680px;
+    max-width: 680px;
     margin: 96px auto 43px;
 }
 
