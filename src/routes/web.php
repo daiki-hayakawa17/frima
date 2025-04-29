@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -48,6 +49,8 @@ Route::get('/search', [ItemController::class, 'search']);
 Route::get('/item/{item_id}', [ItemController::class, 'detail'])->name('detail');
 
 Route::get('/register', [ItemController::class, 'registerView']);
+
+Route::post('/register', [RegisteredUserController::class, 'store']);
 
 Route::post('/mypage/profile', [AuthController::class,'profileRegister']);
 
