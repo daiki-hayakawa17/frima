@@ -363,8 +363,6 @@
     color: #FD0707;
 }
 
-@media
-
 @media (min-width: 768px) and (max-width: 850px) {
     .left__content,
     .right__content {

@@ -216,3 +216,23 @@
     line-height: 21px;
     color: #FD0707;
 }
+
+@media (min-width: 768px) and (max-width:850px) {
+    .purchase__form {
+        flex-direction: column;
+    }
+
+    .under__line--item,
+    .under__line--pay,
+    .under__line--address {
+        width: 100%;
+    }
+
+    .pay__confirm {
+        margin: 0 auto;
+    }
+
+    .form__button {
+        text-align: center;
+    }
+}
