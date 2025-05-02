@@ -235,4 +235,8 @@
     .form__button {
         text-align: center;
     }
+
+    .address__header {
+        width: 100%;
+    }
 }
