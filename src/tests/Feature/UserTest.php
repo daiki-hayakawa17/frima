@@ -112,5 +112,57 @@ class UserTest extends TestCase
         ]);
     }
 
-    
+    public function test_register_success()
+    {
+        $response = $this->from('/register')->post('/register', [
+            'name' => 'testuser',
+            'email' => 'test@example.com',
+            'password' => 'test1234',
+            'password_confirmation' => 'test1234',
+        ]);
+
+        $response->assertRedirect('/login');
+
+        
+    }
+
+    public function test_login_fails_without_email()
+    {
+        $response = $this->from('/login')->post('/login', [
+            'password' => 'test1234',
+        ]);
+
+        $response->assertRedirect('/login');
+
+        $response->assertSessionHasErrors([
+            'email' => 'メールアドレスを入力してください',
+        ]);
+    }
+
+    public function test_login_fails_without_password()
+    {
+        $response = $this->from('/login')->post('/login', [
+            'email' => 'test@example.com',
+        ]);
+
+        $response->assertRedirect('/login');
+
+        $response->assertSessionHasErrors([
+            'password' => 'パスワードを入力してください',
+        ]);
+    }
+
+    public function test_login_fails_without_no_data()
+    {
+        $response = $this->from('/login')->post('/login',[
+            'email' => 'test1@example.com',
+            'password' => 'test5678',
+        ]);
+
+        $response->assertRedirect('/login');
+
+        $response->assertSessionHasErrors([
+            'email' => 'ログイン情報が登録されていません',
+        ]);
+    }
 }
