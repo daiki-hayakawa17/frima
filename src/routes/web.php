@@ -25,9 +25,10 @@ Route::get('/', function () {
 
 Route::middleware('auth', 'verified')->group(function() {
     Route::get('/purchase/{item_id}', [ItemController::class, 'purchase'])->name('purchase');
-    Route::post('/purchase/{item_id}', [ItemController::class, 'buy']);
+    Route::post('/purchase/{item_id}', [ItemController::class, 'buy'])->name('purchase.buy');
     Route::get('/mypage', [ItemController::class, 'mypageView'])->name('mypage');
     Route::get('/mypage/profile', [AuthController::class, 'profileView']);
+    Route::post('/mypage/profile', [AuthController::class,'profileRegister']);
     Route::get('/purchase/address/{item_id}', [ItemController::class, 'addressView']);
     Route::post('/purchase/address/{item_id}', [ItemController::class, 'addressUpdate']);
     Route::get('/sell', [ItemController::class, 'sellView']);
@@ -52,7 +53,7 @@ Route::get('/register', [ItemController::class, 'registerView']);
 
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::post('/mypage/profile', [AuthController::class,'profileRegister']);
+
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');

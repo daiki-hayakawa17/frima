@@ -26,24 +26,29 @@ class ItemController extends Controller
         $query = Item::with('categories');
 
         if ($request->filled('keyword')) {
-            $query->KeywordSearch($request->keyword);
+            $query->keywordSearch($request->keyword);
         }
 
-        if ($page === 'mylist') {
-            $user = Auth::user();
-            if (isset($user)) {
-                $items = $user->likes()->when($request->filled('keyword'), function ($q) use ($request){
-                    $q->KeywordSearch($request->keyword);
-                })
-                ->get();
-            } else {
-                $items = null;
-            }
-            // dd($items);
-        } else {
-            $items = $query->get();
+        $user = Auth::user();
+        
+        if ($page != 'mylist') {
+            $items = $query->when(isset($user), function ($q) use ($user) {
+                return $q->where('seller_id', '!=', $user->id);
+            })->get();
+            return view('index', compact('items'));
         }
         
+        
+        $items = null;
+        if (isset($user)) {
+            $items = Item::whereHas('likes', function($q) use ($user) {
+                $q->where('user_id', $user->id);
+            })->when($request->filled('keyword'), function ($q) use ($request){
+                return $q->keywordSearch($request->keyword);
+            })
+            ->where('seller_id', '!=', $user->id)
+            ->get();
+        }
         
         return view('index', compact('items'));
     }
@@ -53,7 +58,7 @@ class ItemController extends Controller
         $item = Item::find($item_id);
         $categories = Category::all();
 
-        $comment_user = Comment::where('item_id', $item_id)->first('id', 'user_id');
+        $comment_user = Comment::where('item_id', $item_id)->first();
 
         if (isset($comment_user)){
             $comment_id = $comment_user['id'];
@@ -90,12 +95,16 @@ class ItemController extends Controller
         $item = Item::find($item_id);
 
         $purchaser_id = $request['user_id'];
-        $item['purchaser_id'] = $purchaser_id;
+        $item->purchaser_id = $purchaser_id;
 
         $delivery_id = $request['delivery_id'];
-        $item['delivery_id'] = $delivery_id;
+        $item->delivery_id = $delivery_id;
+
+        $pay = $request['pay'];
+        $item->pay = $pay;
 
         $item->save();
+
 
         Stripe::setApiKey(env('STRIPE_SECRET'));
 

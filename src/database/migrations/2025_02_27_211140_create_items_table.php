@@ -18,6 +18,7 @@ class CreateItemsTable extends Migration
             $table->foreignId('delivery_id')->nullable()->constrained()->cascadeOnDelete();
             $table->integer('purchaser_id')->nullable();
             $table->integer('seller_id')->nullable();
+            $table->tinyinteger('pay')->nullable();
             $table->tinyInteger('condition');
             $table->string('name');
             $table->string('image');

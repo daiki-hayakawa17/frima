@@ -65,7 +65,7 @@
             <tr>
                 <th>支払い方法</th>
                 <td>
-                    <textarea name="output" id="output">コンビニ払い</textarea>
+                    <textarea name="output" id="output" readonly>コンビニ払い</textarea>
                 </td>
             </tr>
         </table>

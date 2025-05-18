@@ -14,6 +14,7 @@ class Item extends Model
         'delivery_id',
         'seller_id',
         'purchaser_id',
+        'pay',
         'name',
         'image',
         'brand',

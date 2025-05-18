@@ -189,6 +189,10 @@
     line-height: 100%;
 }
 
+.pay__confirm td textarea:focus {
+    outline: none;
+}
+
 .form__button {
     margin-top: 66px;
 }
@@ -217,7 +221,7 @@
     color: #FD0707;
 }
 
-@media (min-width: 768px) and (max-width:850px) {
+@media (max-width:850px) {
     .purchase__form {
         flex-direction: column;
     }
