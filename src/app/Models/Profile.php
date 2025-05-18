@@ -16,7 +16,6 @@ class Profile extends Model
         'post',
         'address',
         'building',
-        'pay',
     ];
 
     public function user()

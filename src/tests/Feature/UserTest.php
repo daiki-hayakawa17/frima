@@ -123,7 +123,10 @@ class UserTest extends TestCase
 
         $response->assertRedirect('/login');
 
-        
+        $this->assertDatabaseHas('users', [
+            'name' => 'testuser',
+            'email' => 'test@example.com',
+        ]);
     }
 
     public function test_login_fails_without_email()
@@ -164,5 +167,33 @@ class UserTest extends TestCase
         $response->assertSessionHasErrors([
             'email' => 'ログイン情報が登録されていません',
         ]);
+    }
+
+    public function test_login_success()
+    {
+        $user = \App\Models\User::factory()->create([
+            'email' => 'test@example.com',
+            'password' => bcrypt('test1234'),
+        ]);
+
+        $response = $this->from('/login')->post('/login',[
+            'email' => 'test@example.com',
+            'password' => 'test1234',
+        ]);
+
+        $this->assertAuthenticatedAs($user);
+    }
+
+    public function test_logout_success()
+    {
+        $user = \App\Models\User::factory()->create([
+            'email_verified_at' => now(),
+        ]);
+
+        $this->actingAs($user);
+
+        $response = $this->post('/logout');
+
+        $this->assertGuest();
     }
 }

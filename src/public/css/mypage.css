@@ -115,7 +115,7 @@
     color: #ff0000;
 }
 
-@media (min-width: 768px) and (max-width: 850px) {
+@media (max-width: 850px) {
     .profile__icon {
         margin-left: 70px;
     }
@@ -127,5 +127,7 @@
 
     .profile__link {
         margin-left: 100px;
+        width: 30%;
+        font-size: 20px;
     }
 }
