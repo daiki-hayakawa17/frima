@@ -95,7 +95,8 @@
             </div>
             <div class="form__group">
                 <span class="form__input--label">販売価格</span>
-                <div class="form__input--text">
+                <div class="form__input--price">
+                    <span>￥</span>
                     <input type="text" name="price">
                 </div>
                 <div class="form__error">
