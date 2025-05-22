@@ -73,7 +73,33 @@
     background: none;
 }
 
-/* --- タブレットサイズ対応 --- */
+@media (max-width:1400px) {
+    .header {
+            padding: 0 20px;
+        }
+    
+        .header__title img {
+            width: 200px;
+        }
+    
+        .header__search {
+            margin: 0 20px;
+        }
+    
+        .header__search input {
+            font-size: 16px;
+        }
+    
+        .header__nav ul {
+            gap: 10px;
+        }
+    
+        .header__nav ul li a,
+        .header__nav--button {
+            font-size: 16px;
+        }
+}
+
 @media screen and (max-width: 850px) {
     .header {
         padding: 0 20px;
