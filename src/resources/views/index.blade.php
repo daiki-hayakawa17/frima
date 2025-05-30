@@ -5,11 +5,16 @@
 @endsection
 
 @section('content')
+
+@php
+    $keyword = request('keyword');
+@endphp
+
 <div class="list__nav" id="list__nav">
-    <a href="{{ route('index', ['keyword' => request('keyword')]) }}" class="list__nav--text {{ request('page') !== 'mylist' ? 'active' : '' }}">
+    <a href="{{ route('index', ['keyword' => $keyword]) }}" class="list__nav--text {{ request('page') !== 'mylist' ? 'active' : '' }}">
         おすすめ
     </a>
-    <a href="{{ route('index', ['page' => 'mylist' , 'keyword' => request('keyword')]) }}" class="list__nav--text mylist {{ request('page') === 'mylist' ? 'active' : '' }}">
+    <a href="{{ route('index', ['page' => 'mylist' , 'keyword' => $keyword]) }}" class="list__nav--text mylist {{ request('page') === 'mylist' ? 'active' : '' }}">
         マイリスト
     </a>
 </div>
@@ -18,20 +23,20 @@
     @if (!empty($items))
     <div class="item__content--inner">
         @foreach ($items as $item)
-            @if (isset($item['purchaser_id']))
-                <div class="sold__item">
-                    <p>sold</p>
-                </div>
-            @else 
-                <div class="item__content">
-                    <a href="/item/{{$item->id}}" class="item__link">
-                        <img src="{{ asset($item->image) }}" alt="商品画像" class="img__content">
-                        <div class="detail__content">
-                            <p>{{$item->name}}</p>
-                        </div>
-                    </a>
-                </div>
-            @endif
+        @if (isset($item['purchaser_id']))
+            <div class="sold__item">
+                <p>sold</p>
+            </div>
+        @else 
+            <div class="item__content">
+                <a href="/item/{{$item->id}}" class="item__link">
+                    <img src="{{ asset($item->image) }}" alt="{{ $item->name }}の画像" class="img__content">
+                    <div class="detail__content">
+                        <p>{{$item->name}}</p>
+                    </div>
+                </a>
+            </div>
+        @endif
         @endforeach
     </div>
     @else
@@ -40,15 +45,3 @@
 </div>
 @endsection
 
-@section('script')
-<script>
-    document.querySelectorAll('.list__nav--text').forEach(link => {
-        link.addEventListener('click', function(){
-
-            document.querySelectorAll('.list__nav--text').forEach(l => l.classList.remove('active'));
-
-            this.classList.add('active');
-        });
-    });
-</script>
-@endsection

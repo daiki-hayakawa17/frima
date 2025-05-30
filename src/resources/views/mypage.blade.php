@@ -26,7 +26,7 @@
         @foreach ($items as $item)
             <div class="item__content">
                 <a href="/item/{{$item->id}}" class="item__link">
-                    <img src="{{ asset($item->image) }}" alt="商品画像" class="img__content">
+                    <img src="{{ asset($item->image) }}" alt="{{ $item->name }}の画像" class="img__content">
                     <div class="detail__content">
                         <p>{{$item->name}}</p>
                     </div>
@@ -38,10 +38,4 @@
         <div class="hidden"></div>
     @endif
 </div>
-@endsection
-
-@section('script')
-<script>
-    
-</script>
 @endsection

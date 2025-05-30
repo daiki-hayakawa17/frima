@@ -8,7 +8,7 @@
 <div class="detail__content">
     <div class="left__content">
         <div class="item__image">
-            <img src="{{ asset($item->image) }}" alt="商品画像" class="img-content">
+            <img src="{{ asset($item->image) }}" alt="{{ $item->name }}の画像" class="img-content">
             <input type="hidden" name="image" value="{{$item->image}}">
         </div>
     </div>
@@ -21,12 +21,12 @@
                     {{ $item->brand }}
                 </p>
                 <p class="item__price">
-                    ￥<span class="price">{{ $item->price }}</span>(税込)
+                    ￥<span class="price">{{ number_format($item->price) }}</span>(税込)
                 </p>
                 <input type="hidden" name="price" value="{{$item->price}}">
                 <div class="icons">
                     <div class="like__button">
-                        @if($item->is_liked_by_auth_user())
+                        @if($item->isLikedByAuthUser())
                             <form class="unlike__button" action="/unlike/{{$item->id}}" method="post">
                                 @csrf
                                 <button class="unlike__button--submit">
@@ -40,7 +40,7 @@
                             <form class="like__button" action="/like/{{$item->id}}" method="post">
                                 @csrf
                                 <button class="like__button--submit">
-                                    <img src="{{ asset('storage/images/like-button.png') }}" alt="いいねボタン">
+                                    <img src="{{ asset(config('path.like_button')) }}" alt="いいねボタン">
                                 </button>
                                 <span class="like__count">
                                 {{ $item->likes->count() }}
@@ -49,7 +49,7 @@
                         @endif
                     </div>
                     <div class="comment__icon">
-                        <img src="{{ asset('storage/images/comment-icon.png') }}" alt="コメントアイコン">
+                        <img src="{{ asset(config('path.comment_icon')) }}" alt="コメントアイコン">
                         <span class="like__count">
                             {{ $item->comments->count() }}
                         </span>
@@ -87,11 +87,11 @@
             <div class="information__status">
                 <p class="subtitle__status">商品の状態</p>
                 <p class="status__content">
-                    @if($item['condition'] == 1)
+                    @if($item->condition == 1)
                     良好
-                    @elseif($item['condition'] == 2)
+                    @elseif($item->condition == 2)
                     目立った傷や汚れなし
-                    @elseif($item['condition'] == 3)
+                    @elseif($item->condition == 3)
                     やや傷や汚れあり
                     @else
                     状態が悪い
@@ -101,16 +101,18 @@
         </div>
         <div class="item__comment">
             <h2 class="comment__title">コメント（{{ $item->comments->count() }}）</h2>
-            @if (isset($comment))
-            <div class="comment__user">
-                <div class="comment__user--profile">
-                    <img src="{{ asset($profile->image) }}" alt="プロフィール画像" class="img-content">
-                    <p class="comment__user--name">{{ $profile->name }}</p>
-                </div>
-                <div class="comment__user--content">
-                    <p class="comment">{{ $comment->comment }}</p>
-                </div>
-            </div>
+            @if ($item->comments->isNotEmpty())
+                @foreach ($item->comments as $comment)
+                    <div class="comment__user">
+                        <div class="comment__user--profile">
+                            <img src="{{ asset(optional($comment->user->profile)->image) }}" alt="プロフィール画像" class="img-content">
+                            <p class="comment__user--name">{{ optional($comment->user->profile)->name }}</p>
+                        </div>
+                        <div class="comment__user--content">
+                            <p class="comment">{{ $comment->comment }}</p>
+                        </div>
+                    </div>
+                @endforeach
             @else
             <div class="hidden"></div>
             @endif

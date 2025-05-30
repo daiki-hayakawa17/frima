@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\Delivery;
@@ -14,13 +15,12 @@ class AuthController extends Controller
 {
     public function profileView()
     {
-        $profile = Profile::where('user_id', \Auth::user()->id)->first(['id', 'image', 'name', 'post', 'address', 'building']);
+        $profile = auth()->user()->profile()->first(['id', 'image', 'name', 'post', 'address', 'building']);
 
-        // dd($profile);
         return view('profile', compact('profile'));
     }
 
-    public function profileRegister(ProfileRequest $request, Profile $profile)
+    public function profileRegister(ProfileRequest $request)
     {
         $dir = 'images';
 
@@ -33,7 +33,7 @@ class AuthController extends Controller
         $image = 'storage/' . $dir . '/' . $file_name;
         $profile_data['image'] = $image;
         
-        $delivery = $request->only('user_id','post', 'address', 'building');
+        $delivery = $request->only('post', 'address', 'building');
 
         Profile::updateOrCreate(
             ['user_id' => $request['user_id']], 
@@ -47,7 +47,10 @@ class AuthController extends Controller
             ]
         );
 
-        Delivery::create($delivery);
+        Delivery::firstOrCreate(
+            ['user_id' => $request->user_id],
+            $delivery
+        );
 
         return redirect('/');
     }

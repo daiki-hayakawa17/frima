@@ -15,14 +15,14 @@
             </div>
             <div class="item__text">
                 <h2 class="item__text--name">{{$item->name}}</h2>
-                <span class="item__text--price"><span>￥</span>{{$item->price}}</span>
+                <span class="item__text--price"><span>￥</span>{{number_format($item->price)}}</span>
             </div>
         </div>
         <div class="under__line--item"></div>
         <div class="left__content--pay">
             <h3 class="form__input--label">支払い方法</h3>
             <div class="form__select">
-                <select class="select__inner" name="pay" id="pay">
+                <select class="select__inner" name="pay" id="pay" required>
                     <option disabled selected>選択してください</option>
                     <option value="1">コンビニ払い</option>
                     <option value="2">カード支払い</option>
@@ -60,7 +60,7 @@
         <table class="pay__confirm">
             <tr>
                 <th>商品代金</th>
-                <td><span>￥</span>{{$item->price}}</td>
+                <td><span>￥</span>{{number_format($item->price)}}</td>
             </tr>
             <tr>
                 <th>支払い方法</th>

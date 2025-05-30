@@ -50,28 +50,7 @@ class Item extends Model
 
     public function checkCategory($category,$item)
     { 
-        $category_id = $category->id;
-        $item_id = $item->id;
-
-        $item_data = Item::find($item_id);
-        $itemCategories = $item_data->categories; 
-        
-        foreach ($itemCategories as $itemCategory) 
-        {
-            if($itemCategory->id == $category_id)
-            {
-                $returnTxt ="yes";
-
-                return $returnTxt;
-            }
-        }
-        
-        if($itemCategory->id != $category_id)
-        {
-            $returnTxt ="no";
-
-            return $returnTxt;
-        }
+        return $this->categories->contains('id', $category->id) ? 'yes' : 'no';
     }
 
     public function scopeKeywordSearch($query, $keyword)
@@ -81,22 +60,9 @@ class Item extends Model
         }
     }
 
-    public function is_liked_by_auth_user()
+    public function isLikedByAuthUser()
     {
-        $id = Auth::id();
-
-        $likers = array();
-        // dd($this->likes);
-        foreach($this->likes as $like) {
-            array_push($likers, $like->user_id);
-        }
-
-        if (in_array($id, $likers)) {
-            return true;
-        } else {
-            return false;
-        }
-       
+        return $this->likes->contains('user_id', Auth::id());
     }
 }
 

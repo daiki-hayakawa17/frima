@@ -101,4 +101,37 @@ class PurchaseTest extends TestCase
         
         $response->assertSee('購入商品');
     }
+
+    public function test_payment_method_is_sent_correctly()
+    {
+        $user = User::factory()->create();
+
+        $item = Item::factory()->create([
+            'pay' => 1,
+        ]);
+
+        $profile = Profile::factory()->create([
+            'user_id' => $user->id,
+        ]);
+
+        $delivery = Delivery::factory()->create([
+            'user_id' => $profile->user_id,
+            'post' => $profile->post,
+            'address' => $profile->address,
+        ]);
+
+        $this->actingAs($user);
+
+        $response = $this->from("/purchase/{$item->id}")->post(route('purchase.buy', $item->id), [
+            'user_id' => $user->id,
+            'delivery_id' => $delivery->id,
+            'pay' => $item->pay,
+            'post' => $delivery->post,
+            'address' => $delivery->address,
+        ]);
+
+        $this->assertDatabaseHas('items', [
+            'pay' => 1,
+        ]);
+    }
 }
