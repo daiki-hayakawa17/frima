@@ -17,7 +17,7 @@
                     <output id="image" class="image__output"></output>
                 </label>
                 <label class="input__label" for="item__image">画像を選択する</label>
-                <input type="file" id="item__image" name="item__image">
+                <input type="file" id="item__image" name="item__image" accept="image/*">
             </div>
             <div class="form__error">
                 @error('item__image')
@@ -33,7 +33,7 @@
                 <div class="form__input--category">
                     @foreach($categories as $category)
                     <label>
-                        <input type="checkbox" id="categories" name="categories[]" value="{{$category->id}}">
+                        <input type="checkbox" name="categories[]" value="{{$category->id}}">
                         <span>{{$category->content}}</span>
                     </label>
                     @endforeach
@@ -85,7 +85,7 @@
             <div class="form__group">
                 <span class="form__input--label">商品の説明</span>
                 <div class="form__input--text">
-                    <textarea name="description"  cols="30" ros="5"></textarea>
+                    <textarea name="description"  cols="30" rows="5"></textarea>
                 </div>
                 <div class="form__error">
                     @error('description')

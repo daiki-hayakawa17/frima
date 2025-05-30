@@ -58,26 +58,9 @@ class ItemController extends Controller
         $item = Item::find($item_id);
         $categories = Category::all();
 
-        $comment_user = Comment::where('item_id', $item_id)->first();
+        $comments = Comment::where('item_id', $item_id)->with('user.profile')->get();
 
-        if (isset($comment_user)){
-            $comment_id = $comment_user['id'];
-
-            $comment = Comment::find($comment_id);
-
-
-            $user_id = $comment['user_id'];
-        
-            $profile = Profile::find($user_id);
-
-            return view('detail', compact('item', 'categories', 'profile', 'comment'));
-        } else {
-            $comment = null;
-
-            $profile = null;
-
-            return view('detail', compact('item', 'categories', 'profile', 'comment'));
-        }
+        return view('detail', compact('item', 'categories', 'comments'));
     }
 
     public function purchase($item_id)
@@ -94,16 +77,20 @@ class ItemController extends Controller
     {
         $item = Item::find($item_id);
 
-        $purchaser_id = $request['user_id'];
-        $item->purchaser_id = $purchaser_id;
+        $purchaser_id = Auth::id();
+        
 
         $delivery_id = $request['delivery_id'];
-        $item->delivery_id = $delivery_id;
+        
 
         $pay = $request['pay'];
-        $item->pay = $pay;
 
-        $item->save();
+
+        $item->update([
+            'purchaser_id' => $purchaser_id,
+            'delivery_id' => $delivery_id,
+            'pay' => $pay,
+        ]);
 
 
         Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -144,9 +131,9 @@ class ItemController extends Controller
         $item = Item::find($item_id);
 
         $delivery = $request->only('post', 'address', 'building');
-        $user_id = $request['user_id'];
+        $user_id = Auth::id();
 
-        $address = Delivery::find($user_id);
+        $address = Delivery::where('user_id', $user_id)->first();
 
         $address->update($delivery);
 
@@ -174,18 +161,16 @@ class ItemController extends Controller
         $file_name = $file->getClientOriginalName();
         $request->file('item__image')->storeAs('public/' . $dir, $file_name);
 
-        $item_data = $request->only('seller_id',  'name', 'image', 'price', 'condition', 'brand', 'description');
+        $item_data = $request->only('name', 'image', 'price', 'condition', 'brand', 'description');
         $image = 'storage/' . $dir . '/' . $file_name;
         $item_data['image'] = $image;
+        $item_data['seller_id'] = Auth::id();
 
         $category = $request->categories;
 
         $item = Item::create($item_data);
         $item->categories()->attach($category);
 
-        $items = Item::paginate(8);
-
-        // dd($category);
         return redirect('/');
     }
 
@@ -195,22 +180,18 @@ class ItemController extends Controller
         $user_id = Auth::id();
         if ($mypage === 'buy') {
             $items = Item::where('purchaser_id', $user_id)->get();
-            // dd($items);
         } elseif ($mypage === 'sell') {
             $items = Item::where('seller_id', $user_id)->get();
-        } else {
-            $items = null;
         }
 
-        $profile = Profile::where('user_id', \Auth::user()->id)->first(['id', 'image', 'name']);
+        $profile = Profile::where('user_id', $user_id)->first(['id', 'image', 'name']);
 
-        // dd($profile);
         return view('mypage', compact('items', 'profile'));
     }
 
     public function search(Request $request)
     {
-        $items = Item::with('categories')->KeywordSearch($request->keyword)->paginate(8);
+        $items = Item::with('categories')->KeywordSearch($request->keyword)->get();
 
 
         return view('index', compact('items'));
@@ -218,12 +199,17 @@ class ItemController extends Controller
 
     public function like($item_id)
     {
-        Like::create([
-            'item_id' => $item_id,
-            'user_id' => Auth::id(),
-        ]);
+        $user_id = Auth::id();
 
-        // dd($item_id);
+        $alreadyLiked = Like::where('item_id', $item_id)->where('user_id', $user_id)->exists();
+
+        if (!$alreadyLiked) {
+            Like::create([
+                'item_id' => $item_id,
+                'user_id' => Auth::id(),
+            ]);
+        }
+
         return redirect(route('detail', $item_id));
     }
 
@@ -239,11 +225,11 @@ class ItemController extends Controller
     {
         $item = Item::find($item_id);
 
-        $comment = new Comment();
-        $comment->comment = $request->comment;
-        $comment->item_id = $item_id;
-        $comment->user_id = Auth::user()->id;
-        $comment->save();
+        Comment::create([
+            'comment' => $request->comment,
+            'item_id' => $item_id,
+            'user_id' => Auth::id(),
+        ]);
 
         return redirect(route('detail', $item_id));
     }

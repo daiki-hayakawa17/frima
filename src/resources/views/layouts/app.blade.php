@@ -15,7 +15,7 @@
 <body>
     <header class="header">
         <a class="header__title" href="/">
-            <img src="{{ asset('/images/logo.svg') }}" class="header__logo">
+            <img src="{{ asset('/images/logo.svg') }}" class="header__logo" alt="Coachtech Free Marketのロゴ">
         </a>
         <form class="header__search" action="/" method="get">
             <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="なにをお探しですか?">
@@ -26,7 +26,7 @@
                 <li class="header__nav--item">
                     <form action="/logout" method="post">
                         @csrf
-                        <button class="header__nav--button">ログアウト</button>
+                        <button class="header__nav--button" type="submit">ログアウト</button>
                     </form>
                 </li>
                 @else

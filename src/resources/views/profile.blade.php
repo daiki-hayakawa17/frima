@@ -14,12 +14,12 @@
             <output id="image" class="image__output">
                 @if (isset($profile) && $profile->image)
                     <div class="reader_file">
-                        <img class="reader_image" src="{{ asset($profile->image) }}">
+                        <img class="reader_image" src="{{ asset($profile->image) }}" alt="プロフィール画像">
                     </div>
                 @endif
             </output>
             <label for="profile__image">画像を選択する</label>
-            <input type="file" id="profile__image" name="image">
+            <input type="file" id="profile__image" name="image" accept="image/*">
         </div>
         <div class="form__error">
             @error('image')
