@@ -49,12 +49,6 @@ Route::get('/search', [ItemController::class, 'search']);
 
 Route::get('/item/{item_id}', [ItemController::class, 'detail'])->name('detail');
 
-Route::get('/register', [ItemController::class, 'registerView']);
-
-Route::post('/register', [RegisteredUserController::class, 'store']);
-
-
-
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
