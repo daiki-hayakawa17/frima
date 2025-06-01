@@ -115,30 +115,29 @@
 
 @section('script')
 <script>
-        document.getElementById('item__image').onchange = function(event){
+    document.getElementById('item__image').onchange = function(event){
 
-            initializeFiles();
+        initializeFiles();
 
-            var files = event.target.files;
+        var files = event.target.files;
 
-            for (var i = 0, f; f = files[i]; i++) {
-                var reader = new FileReader;
-                reader.readAsDataURL(f);
+        for (var i = 0, f; f = files[i]; i++) {
+            var reader = new FileReader;
+            reader.readAsDataURL(f);
 
-                reader.onload = (function(theFile) {
-                    return function (e) {
-                        var div = document.createElement('div');
-                        div.className = 'reader_file';
-                        div.innerHTML += '<img class="reader_image" src="' + e.target.result + '" />';
-                        document.getElementById('image').insertBefore(div, null);
-                    }
-                })(f);
-            }
-        };
-
-        function initializeFiles() {
-            document.getElementById('image').innerHTML = '';
+            reader.onload = (function(theFile) {
+                return function (e) {
+                    var div = document.createElement('div');
+                    div.className = 'reader_file';
+                    div.innerHTML += '<img class="reader_image" src="' + e.target.result + '" />';
+                    document.getElementById('image').insertBefore(div, null);
+                }
+            })(f);
         }
+    };
 
-    </script>
+    function initializeFiles() {
+        document.getElementById('image').innerHTML = '';
+    }
+</script>
 @endsection
