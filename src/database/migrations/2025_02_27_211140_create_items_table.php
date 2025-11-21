@@ -25,6 +25,7 @@ class CreateItemsTable extends Migration
             $table->string('brand')->nullable();
             $table->integer('price');
             $table->text('description');
+            $table->enum('status', ['available', 'trading', 'sold'])->default('available');
             $table->timestamps();
         });
     }
