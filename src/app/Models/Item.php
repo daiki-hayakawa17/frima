@@ -20,12 +20,13 @@ class Item extends Model
         'brand',
         'price',
         'condition',
-        'description'
+        'description',
+        'status',
     ];
 
     public function categories()
     {
-        return $this->belongsTomany(Category::class,
+        return $this->belongsToMany(Category::class,
         'item_category','item_id','category_id');
     }
 

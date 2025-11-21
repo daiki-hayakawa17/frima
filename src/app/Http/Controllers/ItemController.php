@@ -10,6 +10,7 @@ use App\Models\Delivery;
 use App\Models\Profile;
 use App\Models\Like;
 use App\Models\Comment;
+use App\Models\Room;
 use App\Http\Requests\AddressRequest;
 use App\Http\Requests\ExhibitionRequest;
 use App\Http\Requests\PurchaseRequest;
@@ -69,7 +70,6 @@ class ItemController extends Controller
 
         $delivery = Delivery::where('user_id', \Auth::user()->id)->first(['id', 'post', 'address', 'building']);
         
-        // dd($delivery);
         return view('purchase', compact('item', 'delivery'));
     }
 
@@ -77,42 +77,25 @@ class ItemController extends Controller
     {
         $item = Item::find($item_id);
 
-        $purchaser_id = Auth::id();
-        
+        $seller = $item->user;
 
-        $delivery_id = $request['delivery_id'];
+        $purchaser = Auth::user();
         
+        $delivery_id = $request['delivery_id'];
 
         $pay = $request['pay'];
 
-
         $item->update([
-            'purchaser_id' => $purchaser_id,
             'delivery_id' => $delivery_id,
             'pay' => $pay,
+            'status' => 'trading',
         ]);
 
+        $room = Room::create();
 
-        Stripe::setApiKey(env('STRIPE_SECRET'));
+        $room->users()->attach([$seller->id, $purchaser->id]);
 
-        $session = Session::create([
-            'payment_method_types' => ['card'],
-            'line_items' => [[
-                'price_data' => [
-                    'currency' => 'jpy',
-                    'product_data' => [
-                        'name' => $item->name,
-                    ],
-                    'unit_amount' => $item->price,
-                ],
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'success_url' => route('purchase.success'),
-            'cancel_url' => route('purchase.cancel'),
-            ]);
-
-        return redirect($session->url);
+        return redirect('/');
     }
 
     public function addressView($item_id)
