@@ -87,6 +87,7 @@ class ItemController extends Controller
 
         $item->update([
             'delivery_id' => $delivery_id,
+            'purchaser_id' => $purchaser->id,
             'pay' => $pay,
             'status' => 'trading',
         ]);
@@ -162,9 +163,13 @@ class ItemController extends Controller
         $mypage = request()->query('mypage', 'sell');
         $user_id = Auth::id();
         if ($mypage === 'buy') {
-            $items = Item::where('purchaser_id', $user_id)->get();
+            $items = Item::where('purchaser_id', $user_id)->where('status', 'sold')->get();
         } elseif ($mypage === 'sell') {
             $items = Item::where('user_id', $user_id)->get();
+        } elseif ($mypage === 'trading') {
+            $items = Item::where('status', 'trading')->where(function ($query) use ($user_id) {
+                $query->where('user_id', $user_id)->orWhere('purchaser_id', $user_id);
+            })->get();
         }
 
         $profile = Profile::where('user_id', $user_id)->first(['id', 'image', 'name']);
