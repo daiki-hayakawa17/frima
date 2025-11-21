@@ -12,7 +12,7 @@ class Item extends Model
 
     protected $fillable = [
         'delivery_id',
-        'seller_id',
+        'user_id',
         'purchaser_id',
         'pay',
         'name',
