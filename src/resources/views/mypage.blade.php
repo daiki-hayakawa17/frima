@@ -28,6 +28,7 @@
     @if (!empty($items))
     <div class="item__contents--inner">
         @foreach ($items as $item)
+            @if ($item->status !== 'trading')
             <div class="item__content">
                 <a href="/item/{{$item->id}}" class="item__link">
                     <img src="{{ asset($item->image) }}" alt="{{ $item->name }}の画像" class="img__content">
@@ -36,6 +37,16 @@
                     </div>
                 </a>
             </div>
+            @else
+            <div class="item__content">
+                <a href="/item/{{$item->id}}/trading" class="item__link">
+                    <img src="{{ asset($item->image) }}" alt="{{ $item->name }}の画像" class="img__content">
+                    <div class="detail__content">
+                        <p>{{$item->name}}</p>
+                    </div>
+                </a>
+            </div>
+            @endif
         @endforeach
     </div>
     @else

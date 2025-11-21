@@ -23,7 +23,7 @@
     @if (!empty($items))
     <div class="item__content--inner">
         @foreach ($items as $item)
-        @if (isset($item['purchaser_id']))
+        @if ($item->status === 'sold')
             <div class="sold__item">
                 <p>sold</p>
             </div>
