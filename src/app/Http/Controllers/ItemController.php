@@ -33,7 +33,7 @@ class ItemController extends Controller
         
         if ($page != 'mylist') {
             $items = $query->when(isset($user), function ($q) use ($user) {
-                return $q->where('seller_id', '!=', $user->id);
+                return $q->where('user_id', '!=', $user->id);
             })->get();
             return view('index', compact('items'));
         }
@@ -46,7 +46,7 @@ class ItemController extends Controller
             })->when($request->filled('keyword'), function ($q) use ($request){
                 return $q->keywordSearch($request->keyword);
             })
-            ->where('seller_id', '!=', $user->id)
+            ->where('user_id', '!=', $user->id)
             ->get();
         }
         
@@ -164,7 +164,7 @@ class ItemController extends Controller
         $item_data = $request->only('name', 'image', 'price', 'condition', 'brand', 'description');
         $image = 'storage/' . $dir . '/' . $file_name;
         $item_data['image'] = $image;
-        $item_data['seller_id'] = Auth::id();
+        $item_data['user_id'] = Auth::id();
 
         $category = $request->categories;
 
@@ -181,7 +181,7 @@ class ItemController extends Controller
         if ($mypage === 'buy') {
             $items = Item::where('purchaser_id', $user_id)->get();
         } elseif ($mypage === 'sell') {
-            $items = Item::where('seller_id', $user_id)->get();
+            $items = Item::where('user_id', $user_id)->get();
         }
 
         $profile = Profile::where('user_id', $user_id)->first(['id', 'image', 'name']);
