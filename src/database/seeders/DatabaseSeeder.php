@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             UserTableSeeder::class,
             ItemTableSeeder::class,
             ProfileTableSeeder::class,
+            DeliveryTableSeeder::class,
         ]);
     }
 }
