@@ -40,7 +40,7 @@
                             <form class="like__button" action="/like/{{$item->id}}" method="post">
                                 @csrf
                                 <button class="like__button--submit">
-                                    <img src="{{ asset(config('path.like_button')) }}" alt="いいねボタン">
+                                    <img src="{{ asset('/images/like-button.png') }}" alt="いいねボタン">
                                 </button>
                                 <span class="like__count">
                                 {{ $item->likes->count() }}
@@ -49,7 +49,7 @@
                         @endif
                     </div>
                     <div class="comment__icon">
-                        <img src="{{ asset(config('path.comment_icon')) }}" alt="コメントアイコン">
+                        <img src="{{ asset('/images/comment-icon.png') }}" alt="コメントアイコン">
                         <span class="like__count">
                             {{ $item->comments->count() }}
                         </span>

@@ -19,7 +19,11 @@
     <a href="{{ route('mypage', ['mypage' => 'buy']) }}" class="list__nav--text buy {{ request('mypage') === 'buy' ? 'active' : '' }}">
         購入した商品
     </a>
+    <a href="{{ route('mypage', ['mypage' => 'trading']) }}" class="list__nav--text trading {{ request('mypage') === 'trading' ? 'active' : '' }}">
+        取引中の商品
+    </a>
 </div>
+<div class="line"></div>
 <div class="item__contents">
     @if (!empty($items))
     <div class="item__contents--inner">
