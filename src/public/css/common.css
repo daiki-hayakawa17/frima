@@ -80,10 +80,11 @@
     
         .header__title img {
             width: 200px;
+            height: 80px;
         }
     
         .header__search {
-            margin: 0 20px;
+            margin: 0 15px;
         }
     
         .header__search input {
@@ -110,7 +111,7 @@
     }
 
     .header__search {
-        margin: 0 20px;
+        margin: 0 15px;
     }
 
     .header__search input {

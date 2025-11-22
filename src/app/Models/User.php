@@ -64,4 +64,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function likes() {
         return $this->belongsToMany(Item::class, 'likes');
     }
+
+    public function rooms() {
+        return $this->belongsToMany(Room::class, 'room_user', 'user_id', 'room_id');
+    }
 }

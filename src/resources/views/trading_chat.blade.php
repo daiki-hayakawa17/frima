@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoachtechFreeMarket</title>
+    <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gorditas:wght@400;700&family=Inika:wght@400;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Noto+Serif+JP:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/trading_chat.css') }}">
+</head>
+
+<body>
+    <header class="header">
+        <a class="header__title" href="/">
+            <img src="{{ asset('/images/logo.svg') }}" class="header__logo" alt="Coachtech Free Marketのロゴ">
+        </a>
+    </header>
+    <main>
+        <div class="sidebar">
+            <h3 class="sidebar__title">その他の取引</h3>
+            @foreach($otherItems as $otherItem)
+                <a href="/trading/chat/{{$otherItem->id}}" class="other__item--link">
+                    <p class="other__item--name">
+                        {{ $otherItem->name }}
+                    </p>
+                </a>
+            @endforeach
+        </div>
+        <div class="content">
+            <div class="content__title">
+                @if ($item->user_id === $user->id)
+                    <img src="{{ asset($puchaserProfile->image) }}">
+                    <h3 class="trading__user">{{ $purchaserProfile->name}}さんとの取引画面</h3>
+                @else
+                    <img src="{{ asset($sellerProfile->image) }}">
+                    <h3 class="trading__user">{{ $sellerProfile->name}}さんとの取引画面</h3>
+                    <form class="trade__complete--form" action="/trade/complete/{{$item->id}}" method="POST">
+                        <button class="trade__complete--button">取引を完了する</button>
+                    </form>
+                @endif
+            </div>
+            <div class="trading__item">
+                <img src="{{ asset($item->image) }}" alt="商品画像">
+                <div class="trading__item--information">
+                    <h3 class="trading__item--name">{{ $item->name }}</h3>
+                    <p class="trading__item--price">￥{{ $item->price }}</p>
+                </div>
+            </div>
+            <div class="chat__messages">
+                
+            </div>
+            <form class="chat__form" action="/trading/chat/{{$item->id}}" method="POST" enctype="multipart/form-data">
+                <input type="text" name="message" class="chat__input" placeholder="取引メッセージを記入してください">
+                <label class="input__label" for="item__image">画像を追加</label>
+                <input type="file" id="item__image" name="item__image" accept="image/*" class="input__image">
+                <button class="submit__button">
+                    <img src="{{ asset('images/inputbutton.jpg') }}" alt="送信ボタン">
+                </button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
