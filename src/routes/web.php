@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TradingChatController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -42,6 +43,7 @@ Route::middleware('auth', 'verified')->group(function() {
     Route::get('cancel', function () {
         return view('cancel');
     })->name('purchase.cancel');
+    Route::get('/trading/chat/{item_id}', [TradingChatController::class, 'chatView']);
 });
 Route::get('/', [ItemController::class, 'index'])->name('index');
 
