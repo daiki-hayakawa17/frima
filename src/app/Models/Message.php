@@ -13,5 +13,6 @@ class Message extends Model
         'user_id',
         'room_id',
         'message',
+        'image',
     ];
 }

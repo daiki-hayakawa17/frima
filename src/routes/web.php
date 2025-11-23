@@ -43,8 +43,10 @@ Route::middleware('auth', 'verified')->group(function() {
     Route::get('cancel', function () {
         return view('cancel');
     })->name('purchase.cancel');
-    Route::get('/trading/chat/{item_id}', [TradingChatController::class, 'chatView']);
+    Route::get('/trading/chat/{item_id}', [TradingChatController::class, 'chatView'])->name('chat.view');
+    Route::post('/trading/chat/{room_id}', [TradingChatController::class, 'send']);
 });
+
 Route::get('/', [ItemController::class, 'index'])->name('index');
 
 Route::get('/search', [ItemController::class, 'search']);
