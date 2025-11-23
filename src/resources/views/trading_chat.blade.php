@@ -38,6 +38,7 @@
                     <img src="{{ asset($sellerProfile->image) }}">
                     <h3 class="trading__user">{{ $sellerProfile->name}}さんとの取引画面</h3>
                     <form class="trade__complete--form" action="/trade/complete/{{$item->id}}" method="POST">
+                        @csrf
                         <button class="trade__complete--button">取引を完了する</button>
                     </form>
                 @endif
@@ -52,15 +53,47 @@
             <div class="chat__messages">
                 
             </div>
-            <form class="chat__form" action="/trading/chat/{{$item->id}}" method="POST" enctype="multipart/form-data">
+            <form class="chat__form" action="/trading/chat/{{$room->id}}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <input type="text" name="message" class="chat__input" placeholder="取引メッセージを記入してください">
-                <label class="input__label" for="item__image">画像を追加</label>
-                <input type="file" id="item__image" name="item__image" accept="image/*" class="input__image">
+                <div class="image__content">
+                    <label class="output__label" for="item__image">
+                        <output id="image" class="image__output"></output>
+                    </label>
+                    <label class="input__label" for="item__image">画像を追加</label>
+                    <input type="file" id="item__image" name="item__image" accept="image/*" class="input__image">
+                </div>
                 <button class="submit__button">
                     <img src="{{ asset('images/inputbutton.jpg') }}" alt="送信ボタン">
                 </button>
             </form>
         </div>
     </main>
+    <script>
+        document.getElementById('item__image').onchange = function(event){
+
+            initializeFiles();
+
+            var files = event.target.files;
+
+            for (var i = 0, f; f = files[i]; i++) {
+                var reader = new FileReader;
+                reader.readAsDataURL(f);
+
+                reader.onload = (function(theFile) {
+                    return function (e) {
+                        var div = document.createElement('div');
+                        div.className = 'reader_file';
+                        div.innerHTML += '<img class="reader_image" src="' + e.target.result + '" />';
+                        document.getElementById('image').insertBefore(div, null);
+                    }
+                })(f);
+            }
+        };
+
+        function initializeFiles() {
+            document.getElementById('image').innerHTML = '';
+        }
+    </script>
 </body>
 </html>

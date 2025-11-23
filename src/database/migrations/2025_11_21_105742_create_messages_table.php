@@ -17,7 +17,8 @@ class CreateMessagesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('room_id')->constrained()->cascadeOnDelete();
-            $table->string('message')->nullable();
+            $table->string('message');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

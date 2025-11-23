@@ -133,10 +133,29 @@ main {
     padding: 10px 20px;
     font-size: 20px;
     font-weight: 700;
+    color: #7b7b7b;
 }
 
 .input__image {
     display: none;
+}
+
+.image__content {
+    position: relative;
+    width: 100%;
+    max-width: 140px;
+    margin-left: 18px;
+}
+
+.image__output img {
+    position: absolute;
+    bottom: 0;
+    z-index: 10;
+    width: 100%;
+    max-width: 140px;
+    height: 140px;
+    border-radius: 4px;
+    object-fit: scale-down;
 }
 
 .input__label {
@@ -149,7 +168,6 @@ main {
     border: 2px solid #ff5555;
     border-radius: 10px;
     color: #ff5555;
-    margin-left: 18px;
     font-size: 20px;
     font-weight: 700;
     cursor: pointer;
