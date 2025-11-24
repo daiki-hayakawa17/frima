@@ -15,4 +15,9 @@ class Message extends Model
         'message',
         'image',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
