@@ -59,7 +59,9 @@
                                 <p class="message__user--name">{{ $message->user->profile->name }}</p>
                             </div>
                             @if ($message->image !== null)
-                                <img src="{{ asset($message->image) }}" class="message__image">
+                                <div class="image__content--right">
+                                    <img src="{{ asset($message->image) }}" class="message__image">
+                                </div>
                             @endif
                             <input type="text" name="message" class="message" value="{{ $message->message }}" form="editForm_{{ $message->id }}">
                             <div class="buttons">
@@ -67,7 +69,7 @@
                                     @csrf
                                     <button class="edit__button" type="submit">編集</button>
                                 </form>
-                                <form class="delete__form" action="/trading/chat/{{ $message->id}}/delete">
+                                <form class="delete__form" action="/trading/chat/{{ $message->id}}/delete" method="POST">
                                     @csrf
                                     <button class="delete__button" type="submit">
                                         削除

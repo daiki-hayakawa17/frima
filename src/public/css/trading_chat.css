@@ -150,9 +150,15 @@ main {
     font-weight: 700;
 }
 
+.image__content--right {
+    display: flex;
+    justify-content: end;
+}
+
 .message__image {
     width: 150px;
     height: 150px;
+    margin-bottom: 5px;
 }
 
 .message {

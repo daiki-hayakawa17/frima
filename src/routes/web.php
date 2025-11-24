@@ -45,6 +45,8 @@ Route::middleware('auth', 'verified')->group(function() {
     })->name('purchase.cancel');
     Route::get('/trading/chat/{item_id}', [TradingChatController::class, 'chatView'])->name('chat.view');
     Route::post('/trading/chat/{room_id}', [TradingChatController::class, 'send']);
+    Route::post('/trading/chat/{message_id}/update', [TradingChatController::class, 'update']);
+    Route::post('/trading/chat/{message_id}/delete', [TradingChatController::class, 'delete']);
 });
 
 Route::get('/', [ItemController::class, 'index'])->name('index');
