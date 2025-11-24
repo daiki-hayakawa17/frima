@@ -26,7 +26,7 @@ Route::get('/', function () {
 
 Route::middleware('auth', 'verified')->group(function() {
     Route::get('/purchase/{item_id}', [ItemController::class, 'purchase'])->name('purchase');
-    Route::post('/purchase/{item_id}', [ItemController::class, 'buy'])->name('purchase.buy');
+    Route::post('/purchase/{item_id}', [ItemController::class, 'trade'])->name('purchase.trade');
     Route::get('/mypage', [ItemController::class, 'mypageView'])->name('mypage');
     Route::get('/mypage/profile', [AuthController::class, 'profileView']);
     Route::post('/mypage/profile', [AuthController::class,'profileRegister']);
@@ -47,6 +47,7 @@ Route::middleware('auth', 'verified')->group(function() {
     Route::post('/trading/chat/{room_id}', [TradingChatController::class, 'send']);
     Route::post('/trading/chat/{message_id}/update', [TradingChatController::class, 'update']);
     Route::post('/trading/chat/{message_id}/delete', [TradingChatController::class, 'delete']);
+    Route::post('/trade/complete/{item_id}', [ItemController::class, 'buy']);
 });
 
 Route::get('/', [ItemController::class, 'index'])->name('index');

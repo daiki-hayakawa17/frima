@@ -73,7 +73,7 @@ class ItemController extends Controller
         return view('purchase', compact('item', 'delivery'));
     }
 
-    public function buy($item_id, PurchaseRequest $request)
+    public function trade($item_id, PurchaseRequest $request)
     {
         $item = Item::find($item_id);
 
@@ -99,13 +99,22 @@ class ItemController extends Controller
         return redirect('/');
     }
 
+    public function buy($item_id) {
+        $item = Item::find($item_id);
+
+        $item->update([
+            'status' => 'sold',
+        ]);
+
+        return redirect('/');
+    }
+
     public function addressView($item_id)
     {
         $item = Item::find($item_id);
 
         $delivery = Delivery::where('user_id', \Auth::user()->id)->first(['id', 'post', 'address', 'building']);
 
-        // dd($item);
         return view('address', compact('item', 'delivery'));
     }
 
