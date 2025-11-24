@@ -85,16 +85,20 @@ class ItemController extends Controller
 
         $pay = $request['pay'];
 
-        $item->update([
-            'delivery_id' => $delivery_id,
-            'purchaser_id' => $purchaser->id,
-            'pay' => $pay,
-            'status' => 'trading',
-        ]);
+        if ($item->status !== 'trading') {
+            $item->update([
+                'delivery_id' => $delivery_id,
+                'purchaser_id' => $purchaser->id,
+                'pay' => $pay,
+                'status' => 'trading',
+            ]);
 
-        $room = Room::create();
+            $room = Room::create([
+                'item_id' => $item_id,
+            ]);
 
-        $room->users()->attach([$seller->id, $purchaser->id]);
+            $room->users()->attach([$seller->id, $purchaser->id]);
+        }
 
         return redirect('/');
     }

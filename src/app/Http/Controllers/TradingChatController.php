@@ -27,19 +27,24 @@ class TradingChatController extends Controller
         
         if ($item->user_id === $user_id) {
             $otherItems = Item::where('status', 'trading')
-                ->where('user_id', $user_id)->where('id', '!=', $item->id)->get();
+                ->where('user_id', $user_id)->where('id', '!=', $item->id)->with('room.messages')
+                ->get()
+                ->sortByDesc(function ($item) {
+                    return optional($item->room && $item->room->messages->first() ? $item->room->messages->first():null)->created_at;
+                })
+                ->values();
         } elseif ($item->purchaser_id === $user_id) {
             $otherItems = Item::where('status', 'trading')
                 ->where('purchaser_id', $user_id)
                 ->where('id', '!=', $item->id)
-                ->get();
+                ->with('room.messages')
+                ->get()
+                ->sortByDesc(function ($item) {
+                    return optional($item->room && $item->room->messages->first() ? $item->room->messages->first():null)->created_at;
+                });
         }
         
-        $room = Room::whereHas('users', function ($query) use ($seller) {
-            $query->where('user_id', $seller->id);
-        })->whereHas('users', function ($query) use ($purchaser) {
-            $query->where('user_id', $purchaser->id);
-        })->first();
+        $room = Room::where('item_id', $item->id)->first();
 
         $messages = Message::where('room_id', $room->id)->get();
         

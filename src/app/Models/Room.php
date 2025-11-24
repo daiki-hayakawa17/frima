@@ -9,9 +9,23 @@ class Room extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'item_id',
+    ];
+
     public function users()
     {
         return $this->belongsToMany(User::class,
         'room_user','room_id','user_id');
+    }
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
     }
 }
