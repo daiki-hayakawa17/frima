@@ -56,11 +56,17 @@
                     </div>
                 </div>
             </div>
-            <div class="buy__button">
-                <a href="/purchase/{{$item->id}}" class="buy__button--submit">
-                    購入手続きへ
-                </a>
-            </div>
+            @if ($item->status !=='trading')
+                <div class="buy__button">
+                    <a href="/purchase/{{$item->id}}" class="buy__button--submit">
+                        購入手続きへ
+                    </a>
+                </div>
+            @else
+                <div class="trading__now">
+                    <p class="trading__text">購入取引中</p>
+                </div>
+            @endif
         </div>
         <div class="item__description">
             <h2 class="description__title">商品説明</h2>

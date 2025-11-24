@@ -49,6 +49,11 @@ class Item extends Model
         return $this->belongsTo(Delivery::class);
     }
 
+    public function room()
+    {
+        return $this->hasOne(Room::class);
+    }
+
     public function checkCategory($category,$item)
     { 
         return $this->categories->contains('id', $category->id) ? 'yes' : 'no';
