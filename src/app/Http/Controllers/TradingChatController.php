@@ -70,4 +70,22 @@ class TradingChatController extends Controller
 
         return back();
     }
+
+    public function update($message_id, Request $request) {
+        $message = Message::find($message_id);
+
+        $message->update([
+            'message' => $request->message,
+        ]);
+
+        return back();
+    }
+
+    public function delete($message_id) {
+        $message = Message::find($message_id);
+
+        $message->delete();
+
+        return back();
+    }
 }
