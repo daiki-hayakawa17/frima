@@ -40,10 +40,10 @@ class TradingChatController extends Controller
         })->whereHas('users', function ($query) use ($purchaser) {
             $query->where('user_id', $purchaser->id);
         })->first();
-        $messages = Message::where('room_id', $room->id);
 
+        $messages = Message::where('room_id', $room->id)->get();
         
-        return view('trading_chat', compact('user', 'item', 'otherItems', 'sellerProfile', 'purchaserProfile', 'room'));
+        return view('trading_chat', compact('user', 'item', 'otherItems', 'sellerProfile', 'purchaserProfile', 'room', 'messages'));
     }
 
     public function send($room_id, Request $request) {
@@ -52,6 +52,7 @@ class TradingChatController extends Controller
         $room = Room::find($room_id);
 
         $dir = 'images';
+        $image = null;
 
         if ($request->file('item__image')) {
             $file = $request->file('item__image');

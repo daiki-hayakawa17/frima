@@ -32,7 +32,7 @@
         <div class="content">
             <div class="content__title">
                 @if ($item->user_id === $user->id)
-                    <img src="{{ asset($puchaserProfile->image) }}">
+                    <img src="{{ asset($purchaserProfile->image) }}">
                     <h3 class="trading__user">{{ $purchaserProfile->name}}さんとの取引画面</h3>
                 @else
                     <img src="{{ asset($sellerProfile->image) }}">
@@ -51,7 +51,43 @@
                 </div>
             </div>
             <div class="chat__messages">
-                
+                @foreach ($messages as $message)
+                    @if ($message->user_id === $user->id)
+                        <div class="message__inner--right">
+                            <div class="message__user--profile right">
+                                <img src="{{ asset($message->user->profile->image) }}" alt="プロフィール画像">
+                                <p class="message__user--name">{{ $message->user->profile->name }}</p>
+                            </div>
+                            @if ($message->image !== null)
+                                <img src="{{ asset($message->image) }}" class="message__image">
+                            @endif
+                            <input type="text" name="message" class="message" value="{{ $message->message }}" form="editForm_{{ $message->id }}">
+                            <div class="buttons">
+                                <form id="editForm_{{ $message->id }}" class="edit__form" action="/trading/chat/{{$message->id}}/update" method="POST">
+                                    @csrf
+                                    <button class="edit__button" type="submit">編集</button>
+                                </form>
+                                <form class="delete__form" action="/trading/chat/{{ $message->id}}/delete">
+                                    @csrf
+                                    <button class="delete__button" type="submit">
+                                        削除
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    @else
+                        <div class="message__inner--left">
+                            <div class="message__user--profile">
+                                <img src="{{ asset( $message->user->profile->image) }}" alt="プロフィール画像">
+                                <p class="message__user--name">{{ $message->user->profile->name }}</p>
+                            </div>
+                            @if ($message->image !== null)
+                                <img src="{{ asset($message->image) }}" class="message__image">
+                            @endif
+                            <p class="message">{{ $message->message }}</p>
+                        </div>
+                    @endif
+                @endforeach
             </div>
             <form class="chat__form" action="/trading/chat/{{$room->id}}" method="POST" enctype="multipart/form-data">
                 @csrf
