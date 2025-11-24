@@ -182,7 +182,14 @@ class ItemController extends Controller
         } elseif ($mypage === 'trading') {
             $items = Item::where('status', 'trading')->where(function ($query) use ($user_id) {
                 $query->where('user_id', $user_id)->orWhere('purchaser_id', $user_id);
-            })->get();
+            })
+            ->with([
+                'room.messages' => function ($query) use ($user_id) {
+                    $query->where('user_id', '!=', $user_id)
+                    ->where('is_read', false);
+                }
+            ])
+            ->get();
         }
 
         $profile = Profile::where('user_id', $user_id)->first(['id', 'image', 'name']);

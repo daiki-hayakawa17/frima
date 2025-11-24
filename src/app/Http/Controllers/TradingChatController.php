@@ -47,6 +47,11 @@ class TradingChatController extends Controller
         $room = Room::where('item_id', $item->id)->first();
 
         $messages = Message::where('room_id', $room->id)->get();
+
+        Message::where('room_id', $room->id)
+            ->where('user_id', '!=', $user_id)
+            ->where('is_read', false)
+            ->update(['is_read' => true]);
         
         return view('trading_chat', compact('user', 'item', 'otherItems', 'sellerProfile', 'purchaserProfile', 'room', 'messages'));
     }
