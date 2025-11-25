@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Profile;
 use App\Models\Room;
 use App\Models\Message;
+use App\Models\Evaluation;
 
 class TradingChatController extends Controller
 {
@@ -52,8 +53,24 @@ class TradingChatController extends Controller
             ->where('user_id', '!=', $user_id)
             ->where('is_read', false)
             ->update(['is_read' => true]);
+
+        $buyerEvaluation = Evaluation::where('item_id', $item_id)
+            ->where('evaluator_id', $item->purchaser_id)
+            ->first();
+
+        $sellerEvaluation = Evaluation::where('item_id', $item_id)
+            ->where('evaluator_id', $item->user_id)
+            ->first();
+
+        $showEvaluationModal = false;
+
+        if ($user_id === $purchaser->id) {
+            $showEvaluationModal = session('showEvaluationModal', false);
+        } elseif ($user_id === $seller->id) {
+            $showEvaluationModal = $buyerEvaluation && !$sellerEvaluation;
+        } 
         
-        return view('trading_chat', compact('user', 'item', 'otherItems', 'sellerProfile', 'purchaserProfile', 'room', 'messages'));
+        return view('trading_chat', compact('user', 'item', 'otherItems', 'sellerProfile', 'purchaserProfile', 'room', 'messages', 'showEvaluationModal'));
     }
 
     public function send($room_id, Request $request) {

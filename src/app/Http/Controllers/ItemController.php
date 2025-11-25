@@ -11,6 +11,7 @@ use App\Models\Profile;
 use App\Models\Like;
 use App\Models\Comment;
 use App\Models\Room;
+use App\Models\Evaluation;
 use App\Http\Requests\AddressRequest;
 use App\Http\Requests\ExhibitionRequest;
 use App\Http\Requests\PurchaseRequest;
@@ -103,13 +104,48 @@ class ItemController extends Controller
         return redirect('/');
     }
 
-    public function buy($item_id) {
+    public function buyerComplete($item_id) {
         $item = Item::find($item_id);
 
-        $item->update([
-            'status' => 'sold',
+        return back()->with([
+            'showEvaluationModal' => true,
+            'item_id' => $item_id,
         ]);
+    }
 
+    public function submitEvaluation($item_id, Request $request)
+    {
+        $item = Item::find($item_id);
+
+        $user_id = Auth::id();
+        $seller_id = $item->user_id;
+        $purchaser_id = $item->purchaser_id;
+
+        if ($user_id === $seller_id) {
+            Evaluation::create([
+                'item_id' => $item_id,
+                'evaluator_id' => $user_id,
+                'target_id' => $purchaser_id,
+                'score' => $request->score,
+            ]);
+        } elseif ($user_id === $purchaser_id) {
+            Evaluation::create([
+                'item_id' => $item_id,
+                'evaluator_id' => $user_id,
+                'target_id' => $seller_id,
+                'score' => $request->score,
+            ]);
+        }
+
+        $buyerEvaluation = Evaluation::where('item_id', $item_id)->where('evaluator_id', $purchaser_id)->exists();
+        $sellerEvaluation = Evaluation::where('item_id', $item_id)->where('evaluator_id', $seller_id)->exists();
+
+        if ($buyerEvaluation && $sellerEvaluation) {
+            $item->update([
+                'status' => 'sold',
+            ]);
+        }
+         
         return redirect('/');
     }
 
