@@ -106,6 +106,30 @@
                 </button>
             </form>
         </div>
+        <div id="modal" class="modal">
+            <div class="modal__content">
+                <p class="trade__complete--message">取引が完了しました。</p>
+                <form class="evaluation__content" action="/trading/chat/evaluation/{{$item->id}}" method="POST">
+                    @csrf
+                    <div class="evaluation__content--inner">
+                        <p class="evaluation__content--text">今回の取引相手はどうでしたか？</p>
+                        <div class="rating">
+                            <input type="radio" id="star5" name="score" value="5">
+                            <label for="star5">★</label>
+                            <input type="radio" id="star4" name="score" value="4">
+                            <label for="star4">★</label>
+                            <input type="radio" id="star3" name="score" value="3">
+                            <label for="star3">★</label>
+                            <input type="radio" id="star2" name="score" value="2">
+                            <label for="star2">★</label>
+                            <input type="radio" id="star1" name="score" value="1">
+                            <label for="star1">★</label>
+                        </div>
+                    </div>
+                    <button class="evaluation__button">送信する</button>
+                </form>
+            </div>
+        </div>
     </main>
     <script>
         document.getElementById('item__image').onchange = function(event){
@@ -133,5 +157,12 @@
             document.getElementById('image').innerHTML = '';
         }
     </script>
+    @if (session('showEvaluationModal') || $showEvaluationModal)
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+                document.getElementById('modal').style.display = 'flex';
+            });
+        </script>
+    @endif
 </body>
 </html>
