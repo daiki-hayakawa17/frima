@@ -9,7 +9,14 @@
     <div class="profile__icon">
         <img src="{{ asset($profile->image) }}" alt="ユーザーアイコン">
     </div>
-    <p class="profile__name">{{$profile->name}}</p>
+    <div>
+        <p class="profile__name">{{$profile->name}}</p>
+        <div class="rating">
+            @for ($i = 1; $i <= 5; $i++)
+                <span class="star {{ $i <= $averageScore ? 'active' : ''}}">★</span>
+            @endfor
+        </div>
+    </div>
     <a class="profile__link" href="/mypage/profile">プロフィールを編集</a>
 </div>
 <div class="list__nav" id="list__nav">
