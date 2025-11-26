@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>CoachtechFreeMarket</title>
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
     <link rel="stylesheet" href="{{ asset('css/common.css') }}">
@@ -98,7 +99,7 @@
                     {{ $message }}
                     @enderror
                 </div>
-                <input type="text" name="message" class="chat__input" placeholder="取引メッセージを記入してください">
+                <input type="text" name="message" class="chat__input" id="chatInput" placeholder="取引メッセージを記入してください" value="{{ session('chat_draft') }}">
                 <div class="image__content">
                     <label class="output__label" for="item__image">
                         <output id="image" class="image__output"></output>
@@ -174,5 +175,18 @@
             });
         </script>
     @endif
+
+    <script>
+        document.getElementById('chatInput').addEventListener('input', function () {
+            fetch('/save-input-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({value: this.value})
+            });
+        })
+    </script>
 </body>
 </html>

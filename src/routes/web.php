@@ -49,6 +49,7 @@ Route::middleware('auth', 'verified')->group(function() {
     Route::post('/trading/chat/{message_id}/delete', [TradingChatController::class, 'delete']);
     Route::post('/trade/complete/{item_id}', [ItemController::class, 'buyerComplete']);
     Route::post('/trading/chat/evaluation/{item_id}', [ItemController::class, 'submitEvaluation']);
+    Route::post('/save-input-session', [TradingChatController::class, 'saveInputSession']);
 });
 
 Route::get('/', [ItemController::class, 'index'])->name('index');

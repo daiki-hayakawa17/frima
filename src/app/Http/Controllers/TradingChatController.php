@@ -74,6 +74,12 @@ class TradingChatController extends Controller
         return view('trading_chat', compact('user', 'item', 'otherItems', 'sellerProfile', 'purchaserProfile', 'room', 'messages', 'showEvaluationModal'));
     }
 
+    public function saveInputSession(Request $request)
+    {
+        session(['chat_draft' => $request->value]);
+        return response()->json(['status' => 'saved']);
+    }
+
     public function send($room_id, ChatRequest $request) {
         $user_id = Auth::id();
 
@@ -95,6 +101,8 @@ class TradingChatController extends Controller
             'message' => $request->message,
             'image' => $image,
         ]);
+
+        session()->forget('chat_draft');
 
         return back();
     }
