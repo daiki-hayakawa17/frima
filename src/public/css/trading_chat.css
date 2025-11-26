@@ -229,7 +229,7 @@ main {
     z-index: 10;
     width: 100%;
     max-width: 140px;
-    height: 140px;
+    min-height: 200px;
     border-radius: 4px;
     object-fit: scale-down;
 }

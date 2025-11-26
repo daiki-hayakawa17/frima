@@ -23,8 +23,8 @@
 </div>
 <div class="list__nav" id="list__nav">
     @php
-        $totalUnread = $items->sum(function ($item) {
-            return $item->room ? $item->room->messages->count() : 0;
+        $totalUnread = $tradingItems->sum(function ($tradingItem) {
+            return $tradingItem->room ? $tradingItem->room->messages->count() : 0;
         });
     @endphp
     <a href="{{ route('mypage', ['mypage' => 'sell']) }}" class="list__nav--text {{ request('mypage', 'sell') === 'sell' ? 'active' : '' }}">
