@@ -11,6 +11,7 @@ use App\Models\Profile;
 use App\Models\Room;
 use App\Models\Message;
 use App\Models\Evaluation;
+use App\Http\Requests\ChatRequest;
 
 class TradingChatController extends Controller
 {
@@ -73,7 +74,7 @@ class TradingChatController extends Controller
         return view('trading_chat', compact('user', 'item', 'otherItems', 'sellerProfile', 'purchaserProfile', 'room', 'messages', 'showEvaluationModal'));
     }
 
-    public function send($room_id, Request $request) {
+    public function send($room_id, ChatRequest $request) {
         $user_id = Auth::id();
 
         $room = Room::find($room_id);
@@ -98,7 +99,7 @@ class TradingChatController extends Controller
         return back();
     }
 
-    public function update($message_id, Request $request) {
+    public function update($message_id, ChatRequest $request) {
         $message = Message::find($message_id);
 
         $message->update([

@@ -11,11 +11,13 @@
     </div>
     <div>
         <p class="profile__name">{{$profile->name}}</p>
-        <div class="rating">
-            @for ($i = 1; $i <= 5; $i++)
-                <span class="star {{ $i <= $averageScore ? 'active' : ''}}">★</span>
-            @endfor
-        </div>
+        @if ($averageScore)
+            <div class="rating">
+                @for ($i = 1; $i <= 5; $i++)
+                    <span class="star {{ $i <= $averageScore ? 'active' : ''}}">★</span>
+                @endfor
+            </div>
+        @endif
     </div>
     <a class="profile__link" href="/mypage/profile">プロフィールを編集</a>
 </div>

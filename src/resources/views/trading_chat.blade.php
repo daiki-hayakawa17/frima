@@ -93,6 +93,11 @@
             </div>
             <form class="chat__form" action="/trading/chat/{{$room->id}}" method="POST" enctype="multipart/form-data">
                 @csrf
+                <div class="form__error">
+                    @error('message')
+                    {{ $message }}
+                    @enderror
+                </div>
                 <input type="text" name="message" class="chat__input" placeholder="取引メッセージを記入してください">
                 <div class="image__content">
                     <label class="output__label" for="item__image">
@@ -100,6 +105,11 @@
                     </label>
                     <label class="input__label" for="item__image">画像を追加</label>
                     <input type="file" id="item__image" name="item__image" accept="image/*" class="input__image">
+                </div>
+                <div class="form__error--image">
+                    @error('item__image')
+                    {{ $message }}
+                    @enderror
                 </div>
                 <button class="submit__button">
                     <img src="{{ asset('images/inputbutton.jpg') }}" alt="送信ボタン">
