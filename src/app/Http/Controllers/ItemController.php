@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TradeCompleteNotice;
+use App\Models\User;
 use App\Models\Item;
 use App\Models\Category;
 use App\Models\Delivery;
@@ -120,6 +123,7 @@ class ItemController extends Controller
         $user_id = Auth::id();
         $seller_id = $item->user_id;
         $purchaser_id = $item->purchaser_id;
+        $purchaser = User::find($purchaser_id);
 
         if ($user_id === $seller_id) {
             Evaluation::create([
@@ -135,6 +139,13 @@ class ItemController extends Controller
                 'target_id' => $seller_id,
                 'score' => $request->score,
             ]);
+
+            $target = User::where('id', $seller_id)->first();
+
+            Mail::to($target->email)->send(new TradeCompleteNotice(
+                $item,
+                $purchaser,
+            ));
         }
 
         $buyerEvaluation = Evaluation::where('item_id', $item_id)->where('evaluator_id', $purchaser_id)->exists();
@@ -211,12 +222,8 @@ class ItemController extends Controller
     {
         $mypage = request()->query('mypage', 'sell');
         $user_id = Auth::id();
-        if ($mypage === 'buy') {
-            $items = Item::where('purchaser_id', $user_id)->where('status', 'sold')->get();
-        } elseif ($mypage === 'sell') {
-            $items = Item::where('user_id', $user_id)->get();
-        } elseif ($mypage === 'trading') {
-            $items = Item::where('status', 'trading')->where(function ($query) use ($user_id) {
+
+        $tradingItems = Item::where('status', 'trading')->where(function ($query) use ($user_id) {
                 $query->where('user_id', $user_id)->orWhere('purchaser_id', $user_id);
             })
             ->with([
@@ -226,6 +233,13 @@ class ItemController extends Controller
                 }
             ])
             ->get();
+
+        if ($mypage === 'buy') {
+            $items = Item::where('purchaser_id', $user_id)->where('status', 'sold')->get();
+        } elseif ($mypage === 'sell') {
+            $items = Item::where('user_id', $user_id)->get();
+        } elseif ($mypage === 'trading') {
+            $items = $tradingItems;
         }
 
         $profile = Profile::where('user_id', $user_id)->first(['id', 'image', 'name']);
@@ -234,7 +248,7 @@ class ItemController extends Controller
 
         $averageScore = round($scores->avg('score') ?? 0);
 
-        return view('mypage', compact('items', 'profile', 'averageScore'));
+        return view('mypage', compact('items', 'tradingItems', 'profile', 'averageScore'));
     }
 
     public function search(Request $request)
