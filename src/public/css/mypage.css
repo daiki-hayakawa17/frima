@@ -23,6 +23,21 @@
     text-align: center;
 }
 
+.rating {
+    display: flex;
+    font-size: 40px;
+    color: #ccc;
+    margin-left: 30px; 
+}
+
+.star {
+    margin-right: 5px;
+}
+
+.active {
+    color: gold;
+}
+
 .profile__link {
     display: block;
     text-decoration: none;

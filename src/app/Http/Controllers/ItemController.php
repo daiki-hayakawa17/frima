@@ -230,7 +230,11 @@ class ItemController extends Controller
 
         $profile = Profile::where('user_id', $user_id)->first(['id', 'image', 'name']);
 
-        return view('mypage', compact('items', 'profile'));
+        $scores = Evaluation::where('target_id', $user_id)->get();
+
+        $averageScore = round($scores->avg('score') ?? 0);
+
+        return view('mypage', compact('items', 'profile', 'averageScore'));
     }
 
     public function search(Request $request)
