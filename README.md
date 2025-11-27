@@ -40,6 +40,12 @@ php artisan db:seed
 php artisan storage:link
 ```
 
+9. DockerFileのFROMを8.1に変更
+
+10. laravel.logに権限errorが出る場合
+`sudo chown -R www-data:www-data src/storage src/bootstrap/cache`
+`sudo chmod -R 775 src/storage src/bootstrap/cache`
+
 ## メール認証
 .envに以下の環境変数を追加
 ``` text
