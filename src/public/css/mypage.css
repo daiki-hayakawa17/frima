@@ -173,7 +173,7 @@
     color: #ff0000;
 }
 
-@media (max-width: 850px) {
+@media (min-width: 768px) and (max-width: 851px) {
     .profile__icon {
         margin-left: 70px;
     }
@@ -187,5 +187,9 @@
         margin-left: 100px;
         width: 30%;
         font-size: 20px;
+    }
+
+    .item__contents--inner {
+        margin-left: 45px;
     }
 }
